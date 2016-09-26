@@ -1,0 +1,4 @@
+class NOTE:
+
+    def create
+
