@@ -11,10 +11,10 @@ class Framework:
     _m_bRun = False
 
     MAX_FPS = 1 / 60  # 1 / FPS
-    _m_FPS = None
-    _m_PrevTime = None
-    _m_CurrentTime = None
-    _m_AccumulatedTime = None
+    _m_FPS = 0.0
+    _m_PrevTime = 0.0
+    _m_CurrentTime = 0.0
+    _m_AccumulatedTime = 0.0
 
     _m_Logo = Logo_Scene.LogoScene()
     _m_Title = Title_Scene.TitleScene()
