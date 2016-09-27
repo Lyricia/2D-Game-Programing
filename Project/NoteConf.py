@@ -1,10 +1,9 @@
-from pico2d import *
-
+from lylib import *
 
 class Note:
 
     def __init__(self):
-        pass
+        self._notesync("testsong")
 
-    def notesync(self, Songnum):
-        pass
+    def _notesync(self, Songname):
+        Mbox("note test", "notename \n%s" % Songname, 0)

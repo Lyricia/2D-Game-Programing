@@ -1,22 +1,29 @@
-from pico2d import *
 from NoteConf import *
+
+from lylib import *
 
 class Music:
 
     _m_RunMusic = False
 
-    _m_CurrentSong = None
+    _m_CurrentSongTitle = None
+    _m_PlayingSong = None
     _m_CurrentNote = None
 
     _m_CurrentSongBPM = None
 
-    def __init__(self,songname):
-        self._songselect(songname)
-        self._m_RunMusic = True
+    def __init__(self,Songname):
+        self._m_CurrentSongTitle=Songname
+        self._loadsong()
+        Mbox("Music Conf", "init music conf \n%s" % Songname,0)
 
-    def _songselect(self, Songname):
 
 
-        self._m_CurrentNote =
+    def _loadsong(self):
+        if SearchFile(self._m_CurrentSongTitle):
+            Mbox("Find", "Find", 0)
 
-        pass
+        #self._m_PlayingSong=load_music(self._m_CurrentSongTitle)
+
+        self._m_CurrentNote = Note._notesync(1, self._m_CurrentSongTitle)
+

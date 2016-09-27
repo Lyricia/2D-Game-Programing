@@ -1,4 +1,5 @@
-from pico2d import *
+from lylib import *
+
 
 import time
 import MusicConf
@@ -15,7 +16,7 @@ class Framework:
     _m_PrevTime = 0.0
     _m_AccTime = 0.0
 
-    _m_Music=MusicConf.Music.songselect(1,1)
+    _m_Music=MusicConf.Music('1.txt')
 
 
     def event_handler(self):
@@ -28,10 +29,12 @@ class Framework:
             elif event.type == SDL_KEYDOWN:
                 if event.key == SDLK_ESCAPE:
                     self._m_State=False
+                elif event.key == "q":
+                    self._m_State = False
 
 
     def _create(self):
-        open_canvas()
+        open_canvas(800,760)
         self._m_State = True
 
 
@@ -42,8 +45,8 @@ class Framework:
 
     def _draw(self):
         clear_canvas()
-        gear = load_image('gear prot.png')
-        gear.draw_now(400, 300)
+        gear = load_image('D:\\Study\\Python\\Season\\Project\\Resources\\Image\\gear prot.png')
+        gear.draw_now(400, 380)
         update_canvas()
 
     def _statebuild(self):
