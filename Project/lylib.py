@@ -13,7 +13,6 @@ def Mbox(title, text, style):
 
 
 
-
 def SearchFile(target):
     targetsong = target + '.mp3'
     targetnote = target + '.txt'
