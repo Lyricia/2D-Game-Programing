@@ -1,5 +1,11 @@
 from NoteConf import *
 
+from sdl2 import *
+from sdl2.sdlimage import *
+from sdl2.sdlttf import *
+from sdl2.sdlmixer import *
+
+
 from lylib import *
 
 class Music:
@@ -21,9 +27,12 @@ class Music:
 
     def _loadsong(self):
         if SearchFile(self._m_CurrentSongTitle):
-            Mbox("Find", "Find", 0)
+            Mbox("Find Song", "%s"%self._m_CurrentSongTitle, 0)
 
-        #self._m_PlayingSong=load_music(self._m_CurrentSongTitle)
+        self._m_PlayingSong = Mix_LoadMUS('Resources\\Song\\evens.mp3')
 
         self._m_CurrentNote = Note._notesync(1, self._m_CurrentSongTitle)
 
+Music =Music('11')
+
+Music._loadsong()

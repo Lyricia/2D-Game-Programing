@@ -1,7 +1,10 @@
 from pico2d import *
+from sdl2 import *
+from sdl2.sdlmixer import *
 
 import ctypes  # An included library with Python install.
 import os
+import time
 
 
 
@@ -21,11 +24,15 @@ def SearchFile(targetsong):
     print(notedir)
 
     musiclist=os.listdir(musicdir)
-    filenames=os.listdir(notedir)
+    notelist=os.listdir(notedir)
 
     if targetsong in musiclist:
         return True
+       #if targ#etsong in notelist:
+       #    return True
+       #else:
+       #    Mbox("CANNOT FIND NOTEFILE", "CANNOT FIND NOTEFILE\n %s\nPlz Chk Note dir" %targetsong, 0)
     else:
-        Mbox("CANNOT FIND SONG", "CANNOT FIND SONG\n %s\nPlz Chk Resource\Music" %targetsong,0)
+        Mbox("CANNOT FIND SONG", "CANNOT FIND SONG\n %s\nPlz Chk Music dir" %targetsong,0)
         return False
 

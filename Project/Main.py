@@ -1,5 +1,5 @@
 from MainFramework import *
 
-Game=Framework
+Game=Framework()
 
 Game.run()

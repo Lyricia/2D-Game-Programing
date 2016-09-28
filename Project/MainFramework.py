@@ -1,7 +1,5 @@
 from lylib import *
 
-
-import time
 import MusicConf
 
 class Framework:
@@ -16,26 +14,25 @@ class Framework:
     _m_PrevTime = 0.0
     _m_AccTime = 0.0
 
-    _m_Music=MusicConf.Music('1.txt')
+    _m_Music=MusicConf.Music('evans.mp3')
 
 
     def event_handler(self):
-        event=get_events()
+        events=get_events()
 
-        for event in event:
+        for event in events:
             if event.type == SDL_QUIT:
                 self._m_State=False
 
             elif event.type == SDL_KEYDOWN:
                 if event.key == SDLK_ESCAPE:
                     self._m_State=False
-                elif event.key == "q":
+                elif event.key == SDLK_q:
                     self._m_State = False
 
 
     def _create(self):
         open_canvas(800,760)
-        self._m_State = True
 
 
     def _update(self):
@@ -45,7 +42,7 @@ class Framework:
 
     def _draw(self):
         clear_canvas()
-        gear = load_image('D:\\Study\\Python\\Season\\Project\\Resources\\Image\\gear prot.png')
+        gear = load_image('Resources\\Image\\gear prot.png')
         gear.draw_now(400, 380)
         update_canvas()
 
@@ -55,7 +52,7 @@ class Framework:
 
     def run(self):
         self._create()
-
+        self._m_State=True
         while self._m_State:
             self._m_CurrentTime = time.time()
             self._m_AccTime += self._m_CurrentTime - self._m_PrevTime
@@ -71,10 +68,3 @@ class Framework:
 
     def _exit(self):
         self._m_State=False
-
-
-
-P=Framework()
-P.run()
-
-
