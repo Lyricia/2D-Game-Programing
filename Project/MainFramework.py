@@ -6,7 +6,7 @@ class Framework:
 
     _m_State = False
 
-    _m_FPS_MAX = 1/60
+    _m_FPS_MAX = 1/120
 
     _m_FPS = None
 
@@ -14,7 +14,7 @@ class Framework:
     _m_PrevTime = 0.0
     _m_AccTime = 0.0
 
-    _m_Music=MusicConf.Music('evans.mp3')
+    _m_Music=MusicConf.Music('evans')
 
 
     def event_handler(self):
@@ -39,11 +39,13 @@ class Framework:
         self.event_handler()
         pass
 
-
     def _draw(self):
         clear_canvas()
+        background = load_image('Resources\\Image\\Background.png')
         gear = load_image('Resources\\Image\\gear prot.png')
+        background.draw_now(400, 380)
         gear.draw_now(400, 380)
+
         update_canvas()
 
     def _statebuild(self):
