@@ -14,25 +14,26 @@ def Mbox(title, text, style):
 
 
 
-def SearchFile(targetsong):
-    rootdir=os.getcwd()
-    musicdir = rootdir+'\\Resources\\Song'
-    notedir = rootdir+'\\Resources\\Note'
+def SearchFile(target):
+    targetsong = target + '.mp3'
+    targetnote = target + '.txt'
+    rootdir = os.getcwd()
+    musicdir = rootdir + '\\Resources\\Song'
+    notedir = rootdir + '\\Resources\\Note'
 
     print(rootdir)
     print(musicdir)
     print(notedir)
 
-    musiclist=os.listdir(musicdir)
-    notelist=os.listdir(notedir)
+    musiclist = os.listdir(musicdir)
+    notelist = os.listdir(notedir)
 
     if targetsong in musiclist:
-        return True
-       #if targ#etsong in notelist:
-       #    return True
-       #else:
-       #    Mbox("CANNOT FIND NOTEFILE", "CANNOT FIND NOTEFILE\n %s\nPlz Chk Note dir" %targetsong, 0)
+        if targetnote in notelist:
+            return True
+        else:
+            Mbox("CANNOT FIND NOTEFILE", "CANNOT FIND NOTEFILE\n %s\nPlz Chk Note dir" % targetnote, 0)
     else:
-        Mbox("CANNOT FIND SONG", "CANNOT FIND SONG\n %s\nPlz Chk Music dir" %targetsong,0)
+        Mbox("CANNOT FIND SONG", "CANNOT FIND SONG\n %s\nPlz Chk Music dir" % targetsong, 0)
         return False
 

@@ -15,7 +15,6 @@ class Music:
     _m_CurrentSongTitle = None
     _m_PlayingSong = None
     _m_CurrentNote = None
-
     _m_CurrentSongBPM = None
 
     def __init__(self,Songname):
@@ -28,11 +27,10 @@ class Music:
     def _loadsong(self):
         if SearchFile(self._m_CurrentSongTitle):
             Mbox("Find Song", "%s"%self._m_CurrentSongTitle, 0)
+            #songloading
+            self._m_CurrentNote = Note._notesync(0,self._m_CurrentSongTitle)
 
-        self._m_PlayingSong = Mix_LoadMUS('Resources\\Song\\evens.mp3')
+            if self._m_CurrentNote:
+                pass
 
-        self._m_CurrentNote = Note._notesync(1, self._m_CurrentSongTitle)
-
-Music =Music('11')
-
-Music._loadsong()
+Music =Music('evans')
