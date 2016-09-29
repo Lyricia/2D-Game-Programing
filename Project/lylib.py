@@ -1,17 +1,13 @@
 from pico2d import *
-from sdl2 import *
-from sdl2.sdlmixer import *
 
 import ctypes  # An included library with Python install.
 import os
-import time
 import datetime
+import time
 
 
 def Mbox(title, text, style):
     ctypes.windll.user32.MessageBoxW(0, text, title, style)
-
-
 
 def SearchFile(target):
     targetsong = target + '.mp3'
@@ -19,10 +15,6 @@ def SearchFile(target):
     rootdir = os.getcwd()
     musicdir = rootdir + '\\Resources\\Song'
     notedir = rootdir + '\\Resources\\Note'
-
-    print(rootdir)
-    print(musicdir)
-    print(notedir)
 
     musiclist = os.listdir(musicdir)
     notelist = os.listdir(notedir)

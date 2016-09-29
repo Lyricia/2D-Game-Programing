@@ -15,6 +15,7 @@ class Framework:
     _m_AccTime = 0.0
 
     _m_Music = None
+    _m_runMusic = False
 
 
     def event_handler(self):
@@ -29,6 +30,9 @@ class Framework:
                     self._m_State=False
                 elif event.key == SDLK_q:
                     self._m_State = False
+                elif event.key == SDLK_s:
+                    self._m_runMusic = True
+
 
 
     def _create(self):
@@ -37,11 +41,15 @@ class Framework:
 
     def _update(self):
         self.event_handler()
-        if self._m_Music == None:
-            self._m_Music = MusicConf.Music('evans')
-            if self._m_Music:
-                Mbox("end", "end", 0)
-        pass
+        if self._m_runMusic == True:
+            if self._m_Music == None:
+                self._m_Music = MusicConf.Music('Evans')
+            if self._m_Music.MusicFinished():
+                print("end")
+                self._m_runMusic=None
+                self._m_Music=None
+
+
 
     def _draw(self):
         clear_canvas()
@@ -49,7 +57,6 @@ class Framework:
         gear = load_image('Resources\\Image\\gear prot.png')
         background.draw_now(400, 380)
         gear.draw_now(400, 380)
-
         update_canvas()
 
     def _statebuild(self):

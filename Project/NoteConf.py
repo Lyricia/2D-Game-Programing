@@ -8,10 +8,8 @@ class Note:
         self._notesync("evans")
 
     def _notesync(self, Songname):
-        f = open("Resources\\Note\\%s" %Songname + '.txt', 'r')
+        f = open("Resources\\Note\\%s" %Songname, 'r')
         Notelist = f.readlines()
-        for line in Notelist:
-            print(line)
         f.close()
 
         Mbox("note test", "notename \n%s" % Songname, 0)
