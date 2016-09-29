@@ -6,7 +6,7 @@ class Framework:
 
     _m_State = False
 
-    _m_FPS_MAX = 1/120
+    _m_FPS_MAX = 1/60
 
     _m_FPS = None
 
@@ -14,7 +14,7 @@ class Framework:
     _m_PrevTime = 0.0
     _m_AccTime = 0.0
 
-    _m_Music=MusicConf.Music('evans')
+    _m_Music = None
 
 
     def event_handler(self):
@@ -37,6 +37,10 @@ class Framework:
 
     def _update(self):
         self.event_handler()
+        if self._m_Music == None:
+            self._m_Music = MusicConf.Music('evans')
+            if self._m_Music:
+                Mbox("end", "end", 0)
         pass
 
     def _draw(self):
