@@ -4,8 +4,8 @@ from lylib import *
 
 class Note:
 
-    def __init__(self):
-        self._notesync("evans")
+    def __init__(self, Songname):
+        self._notesync(Songname)
 
     def _notesync(self, Songname):
         f = open("Resources\\Note\\%s" %Songname, 'r')

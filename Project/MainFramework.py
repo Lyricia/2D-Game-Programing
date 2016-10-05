@@ -1,22 +1,25 @@
 from lylib import *
 
 import MusicConf
+import PlayScene
+import Menu
 
 class Framework:
 
     _m_State = False
 
+    #Frame
     _m_FPS_MAX = 1/60
-
-    _m_FPS = None
 
     _m_CurrentTime = 0.0
     _m_PrevTime = 0.0
     _m_AccTime = 0.0
 
+    #music
     _m_Music = None
     _m_runMusic = False
 
+    _m_CurrentScene = None
 
     def event_handler(self):
         events=get_events()
@@ -32,6 +35,12 @@ class Framework:
                     self._m_State = False
                 elif event.key == SDLK_s:
                     self._m_runMusic = True
+                    self._m_CurrentScene = 'PlayScene'
+                elif event.key == SDLK_m:
+                    self._m_runMusic = False
+                    self._m_CurrentScene = 'Menu'
+                    self._m_Music.MusicStop()
+                    self._m_Music = None
 
 
 
@@ -48,19 +57,22 @@ class Framework:
                 print("end")
                 self._m_runMusic=None
                 self._m_Music=None
+                self._m_CurrentScene = 'Menu'
 
 
 
     def _draw(self):
-        clear_canvas()
-        background = load_image('Resources\\Image\\Background.png')
-        gear = load_image('Resources\\Image\\gear prot.png')
-        background.draw_now(400, 380)
-        gear.draw_now(400, 380)
-        update_canvas()
-
-    def _statebuild(self):
+        if self._m_CurrentScene:
+           self._scenesetup()
+           self._m_CurrentScene.sceneupdate()
         pass
+
+    def _scenesetup(self):
+        if self._m_CurrentScene == 'PlayScene':
+            self._m_CurrentScene = PlayScene.PlayScene(self._m_Music)
+        if self._m_CurrentScene == 'Menu':
+            self._m_CurrentScene = Menu.MenuScene()
+
 
 
     def run(self):
@@ -70,10 +82,9 @@ class Framework:
             self._m_CurrentTime = time.time()
             self._m_AccTime += self._m_CurrentTime - self._m_PrevTime
             self._m_PrevTime = self._m_CurrentTime
-            if self._m_AccTime > self._m_FPS_MAX:
-                self._m_FPS = 1 / self._m_AccTime
-                self._update()
+            if self._m_AccTime > self._m_FPS_MAX:       # draw when fps over
                 self._draw()
+                self._update()
                 self._m_AccTime = 0
 
         self._exit()

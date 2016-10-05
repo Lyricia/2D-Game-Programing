@@ -1,5 +1,6 @@
 from pico2d import *
 
+
 import ctypes  # An included library with Python install.
 import os
 import datetime
@@ -9,7 +10,7 @@ import time
 def Mbox(title, text, style):
     ctypes.windll.user32.MessageBoxW(0, text, title, style)
 
-def SearchFile(target):
+def searchfile(target):
     targetsong = target + '.mp3'
     targetnote = target + '.txt'
     rootdir = os.getcwd()
@@ -27,4 +28,3 @@ def SearchFile(target):
     else:
         Mbox("CANNOT FIND SONG", "CANNOT FIND SONG\n %s\nPlz Chk Music dir" % targetsong, 0)
         return False
-
