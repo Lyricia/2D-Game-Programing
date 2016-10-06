@@ -43,9 +43,10 @@ class Framework:
                     self._m_Music = None
 
 
-
     def _create(self):
         open_canvas(800,760)
+        self._m_CurrentScene = 'Menu'
+
 
 
     def _update(self):
