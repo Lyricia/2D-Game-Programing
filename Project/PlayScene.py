@@ -16,10 +16,16 @@ class PlayScene:
         self._m_note = load_image('Resources\\Image\\note p1.png')
         pass
 
+    def _noteupdate(self):
+        pass
+
+
+
     def sceneupdate(self):  # update play scene -> time update
         clear_canvas()
 
         print('scene update func')
+        #print('%d' self._m_Musicdata)
 
         self._m_background.draw(400, 380)
         self._m_gear.draw(400, 380)

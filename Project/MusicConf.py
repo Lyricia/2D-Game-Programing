@@ -24,10 +24,11 @@ class Music:
                     self._m_CurrentSongTitle = line[1]
                     self._m_CurrentNote = line[2]
                     self._m_CurrentSongBPM = line[3]
-                    self._m_PlayEndTime = time.time() + float(10) + float(2)
+                    self._m_PlayEndTime = time.time() + float(line[4]) + float(2)
                     break
 
             self._loadsong()
+
 
             Mbox("Music Conf", "init music conf \n%s" % Songname,0)
 
@@ -40,12 +41,12 @@ class Music:
         self._m_PlayingSong.play()
 
 
+
     def MusicStop(self):
         self._m_PlayingSong.stop()
 
 
     def MusicFinished(self):           #if time now passed music during time return stop (True)
         currenttime=time.time()
-
         if currenttime > self._m_PlayEndTime:
             return True
