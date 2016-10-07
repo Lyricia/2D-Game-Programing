@@ -8,6 +8,7 @@ class Note:
 
     def __init__(self, Songname):
         self._notesync(Songname)
+        self._m_Notelist = []
 
 
     def _notesync(self, Songname):

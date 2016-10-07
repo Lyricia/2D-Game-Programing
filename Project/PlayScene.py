@@ -1,5 +1,6 @@
 from lylib import *
 
+import MusicConf
 
 class PlayScene:
 
@@ -19,6 +20,7 @@ class PlayScene:
         pass
 
     def _noteupdate(self):
+        print(self._m_Musicdata.CurrentNote)
         pass
 
 
@@ -26,9 +28,8 @@ class PlayScene:
     def sceneupdate(self):  # update play scene -> time update
         clear_canvas()
 
-        print('scene update func')
-        #print('%d' self._m_Musicdata)
-
+        #print('scene update func')
+        print(self._m_Musicdata.CurrentNote[0])
         self._m_background_image.draw(400, 380)
         self._m_gear_image.draw(400, 380)
         self._m_note_image.draw(283,400)
