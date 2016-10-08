@@ -13,7 +13,7 @@ class Framework:
 
     _m_CurrentTime = 0.0
     _m_PrevTime = 0.0
-    _m_AccTime = 0.0
+    _m_AccTime = 0.0           #Accumulated time -> playing time
 
     #music
     _m_Music = None
@@ -54,6 +54,9 @@ class Framework:
         if self._m_runMusic == True:
             if self._m_Music == None:
                 self._m_Music = MusicConf.Music('Evans')
+            elif self._m_Music:
+                self._m_Music._m_CurrentNote.UpdateNote(self._m_AccTime)
+
             if self._m_Music.MusicFinished():
                 print("end")
                 self._m_runMusic=None
@@ -84,8 +87,8 @@ class Framework:
             self._m_AccTime += self._m_CurrentTime - self._m_PrevTime
             self._m_PrevTime = self._m_CurrentTime
             if self._m_AccTime > self._m_FPS_MAX:       # draw when fps over
-                self._draw()
                 self._update()
+                self._draw()
                 self._m_AccTime = 0
 
         self._exit()

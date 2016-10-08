@@ -1,5 +1,5 @@
 from pico2d import *
-
+from math import *
 
 import ctypes  # An included library with Python install.
 import os

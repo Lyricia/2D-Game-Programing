@@ -4,13 +4,13 @@ from lylib import *
 
 class Music:
 
-    CurrentNote = None
-    CurrentSongTitle = None
-
-    _m_RunMusic = False
+    _m_CurrentNote = None
+    _m_CurrentSongTitle = None
 
     _m_PlayingSong = None
+
     _m_PlayEndTime = None
+    _m_SongDuration = None
 
     _m_CurrentSongBPM = None
 
@@ -23,9 +23,13 @@ class Music:
                 line = line.split(' ')
                 if line[0] == Songname:
                     self._m_CurrentSongTitle = line[1]
-                    self.CurrentNote = line[2]
+                    self._m_CurrentNote = line[2]
                     self._m_CurrentSongBPM = line[3]
-                    self._m_PlayEndTime = time.time() + float(line[4]) + float(2)
+                    self._m_SongDuration = line[4]
+
+                    self._m_StartTime = time.time()
+
+                    self._m_PlayEndTime = self._m_StartTime  + float(self._m_SongDuration) + float(2)
                     break
 
             self._loadsong()
@@ -37,8 +41,8 @@ class Music:
     def _loadsong(self):
 
         self._m_PlayingSong = load_music('Resources\\Song\\%s' %self._m_CurrentSongTitle)
-        self.CurrentNote = Note(self.CurrentNote)
-        self._m_PlayingSong.set_volume(100)
+        self._m_CurrentNote = Note(self._m_CurrentNote, self._m_SongDuration, self._m_CurrentSongBPM)
+        self._m_PlayingSong.set_volume(10)
         self._m_PlayingSong.play()
 
 
