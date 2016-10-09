@@ -27,8 +27,8 @@ class PlayScene:
         self._m_background_image.draw(400, 380)
         self._m_gear_image.draw(400, 380)
 
-        for idx in range(100):
-            if self._m_Notedata[0][idx] != '0':
+        for idx in range(len(self._m_Notedata[0])):
+            if self._m_Notedata[0][idx] != '0' and int(self._m_Notedata[0][idx]) > 60:
                 self._m_note_image.draw(283, int(self._m_Notedata[0][idx]))
 
         update_canvas()
