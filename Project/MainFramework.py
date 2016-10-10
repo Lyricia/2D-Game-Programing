@@ -41,6 +41,13 @@ class Framework:
                     self._m_CurrentScene = 'Menu'
                     self._m_Music.MusicStop()
                     self._m_Music = None
+                elif event.key == SDLK_e and self._m_runMusic:
+                    self._m_Music._m_CurrentNote.notejudgechk()
+                elif event.key == SDLK_2 and self._m_runMusic:
+                    self._m_Music._m_CurrentNote._m_speed = 2
+                elif event.key == SDLK_4 and self._m_runMusic:
+                    self._m_Music._m_CurrentNote._m_speed = 4
+
 
 
     def _create(self):

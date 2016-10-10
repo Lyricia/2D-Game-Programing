@@ -16,7 +16,7 @@ class Music:
 
     def __init__(self,Songname):
         if searchfile(Songname):
-            Mbox("Find Song", "%s"%Songname, 0)
+            print("Find song : %s" % Songname)
 
             music_f=open('Resources\\Song\\song list.txt')
             for line in music_f:
@@ -35,7 +35,7 @@ class Music:
             self._loadsong()
 
 
-            Mbox("Music Conf", "init music conf \n%s" % Songname,0)
+            print("init music conf \n%s" % Songname)
 
 
     def _loadsong(self):
