@@ -42,7 +42,7 @@ class PlayScene:
                     elif keyidx % 2 == 1:
                         self._m_note2_image.draw(283 + 69 * keyidx, int(self._m_Notedata[keyidx][idx]))
 
-        self.liney += 12 * 2/3
+        self.liney += 40 / self._m_Musicdata._m_CurrentNote._m_SongBPM * 20 * self._m_Musicdata._m_CurrentNote._m_speed
         if self.liney > 640:
             self.liney = 0
         #self.liney - (self._m_Musicdata._m_CurrentSongBPM / 60 * self._m_Musicdata._m_CurrentNote._m_speed)
