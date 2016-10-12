@@ -34,8 +34,9 @@ class Framework:
                 elif event.key == SDLK_q:
                     self._m_State = False
                 elif event.key == SDLK_s:
-                    self._m_runMusic = True
-                    self._m_CurrentScene = 'PlayScene'
+                    if self._m_runMusic == False :
+                        self._m_runMusic = True
+                        self._m_CurrentScene = 'PlayScene'
                 elif event.key == SDLK_m:
                     self._m_Music.MusicStop()
                     del(self._m_Music)
@@ -47,18 +48,23 @@ class Framework:
                     self._m_Music._m_CurrentNote.notejudgechk()
 
                 if self._m_runMusic and self._m_Music:
-                    if event.key == SDLK_1:
+                    if event.key == SDLK_1 and self._m_Music._m_CurrentNote._m_speed != 1:
                         self._m_Music._m_CurrentNote._m_speed = 1
-                    elif event.key == SDLK_2:
+                        self._m_Music._m_CurrentNote._NotePosition(True)
+                    elif event.key == SDLK_2 and self._m_Music._m_CurrentNote._m_speed != 2:
                         self._m_Music._m_CurrentNote._m_speed = 2
-                    elif event.key == SDLK_3:
+                        self._m_Music._m_CurrentNote._NotePosition(True)
+                    elif event.key == SDLK_3 and self._m_Music._m_CurrentNote._m_speed != 3:
                         self._m_Music._m_CurrentNote._m_speed = 3
-                    elif event.key == SDLK_4:
+                        self._m_Music._m_CurrentNote._NotePosition(True)
+                    elif event.key == SDLK_4 and self._m_Music._m_CurrentNote._m_speed != 4:
                         self._m_Music._m_CurrentNote._m_speed = 4
-                    elif event.key == SDLK_5:
+                        self._m_Music._m_CurrentNote._NotePosition(True)
+                    elif event.key == SDLK_5 and self._m_Music._m_CurrentNote._m_speed != 5:
                         self._m_Music._m_CurrentNote._m_speed = 5
+                        self._m_Music._m_CurrentNote._NotePosition(True)
 
-                    self._m_Music._m_CurrentNote._NotePosition(True)
+
 
 
 

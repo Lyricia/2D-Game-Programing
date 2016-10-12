@@ -8,9 +8,12 @@ class Note:
     _m_keynum = 4
     _m_judgeidx = 0
 
+    notechk = 0
+
     def __init__(self, Songname, SongDuration, SongBPM):
         self._m_Notelist = list()
         self._notesync(Songname)
+
         self._m_speed = 1
         self._m_SongBPM = int(SongBPM)
         self._m_judgeidx = 0
@@ -35,41 +38,35 @@ class Note:
         print("notename \n%s" % Songname)
         return self._m_Notelist #note Loading end -> return to song conf
 
-
     def _NotePosition(self, runmusic):
-        if not runmusic:
-            for keyidx in range(self._m_keynum):
-                for idx in range(len(self._m_Notelist[0])):
-                    if self._m_Notelist[keyidx][idx] != 0:
-                        self._m_Notelist[keyidx][idx] = 760 + 40 * idx * self._m_speed * self._m_speed + 40 * self._m_speed * self._m_speed
-        if runmusic:
-            for keyidx in range(self._m_keynum):
-                for idx in range(len(self._m_Notelist[0])):
-                    if self._m_Notelist[keyidx][idx] != 0:
-                        self._m_Notelist[keyidx][idx] = 40 * idx * self._m_speed * self._m_speed + 40 * self._m_speed * self._m_speed
-
-
+        for keyidx in range(self._m_keynum):
+            for idx in range(len(self._m_Notelist[0])):
+                if self._m_Notelist[keyidx][idx] != 0:
+                    self._m_Notelist[keyidx][idx] = 40 * idx * self._m_speed - 40 * (self._m_judgeidx - 1)* self._m_speed
 
     def UpdateNote(self, Acctime):
-
-
         self._m_acctime += Acctime
         if self._m_acctime > self._m_SongBPM / 3600:
             for keyidx in range(self._m_keynum):
                 for tmp in range(len(self._m_Notelist[0])):  # while tmp < self._m_CallNote * self._m_Updateidx:
-                    if self._m_Notelist[keyidx][tmp] != 0:
-                        self._m_Notelist[keyidx][tmp] -= 10 * self._m_speed
-                        print(self._m_Notelist[keyidx][tmp], tmp)
-                    tmp += 1
-                for idx in range(len(self._m_Notelist[keyidx])):
-                    if int(self._m_Notelist[keyidx][idx]) < 140:
-                        self._m_Notelist[keyidx][idx] = 0
-                        self._m_judgeidx += 1
+                    if self._m_Notelist[keyidx][tmp] > 0:
+                        self._m_Notelist[keyidx][tmp] -= 1 * self._m_speed
 
-        #print(self._m_PlayingTime)
+        for keyidx in range(self._m_keynum):
+            if self._m_Notelist[keyidx][self._m_judgeidx] < 20:
+                self.notechk += 1
 
+        if self.notechk == self._m_keynum:
+            print(self._m_Notelist[0][self._m_judgeidx],
+                  self._m_Notelist[1][self._m_judgeidx],
+                  self._m_Notelist[2][self._m_judgeidx],
+                  self._m_Notelist[3][self._m_judgeidx],
+                  )
+            for keyidx in range(self._m_keynum):
+                self._m_Notelist[keyidx][self._m_judgeidx] = 0
 
-        pass
+            self._m_judgeidx += 1
+        self.notechk = 0
 
 
     def notejudgechk(self):
