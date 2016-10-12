@@ -39,7 +39,7 @@ class PlayScene:
         for keyidx in range(4):
             for idx in range(len(self._m_Notedata[keyidx])):
                 if self._m_Notedata[keyidx][idx] != '0':
-                    if int(self._m_Notedata[keyidx][idx]) > 126 and int(self._m_Notedata[keyidx][idx]) < 760:
+                    if int(self._m_Notedata[keyidx][idx]) > 0 and int(self._m_Notedata[keyidx][idx]) < 760:
                         if keyidx % 2 == 0:
                             self._m_note1_image.draw(283 + 69 * keyidx, int(self._m_Notedata[keyidx][idx]))
                         elif keyidx % 2 == 1:

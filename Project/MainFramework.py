@@ -43,26 +43,25 @@ class Framework:
                     self._m_runMusic = False
                     self._m_CurrentScene = 'Menu'
 
-
                 elif event.key == SDLK_e and self._m_runMusic:
                     self._m_Music._m_CurrentNote.notejudgechk()
 
                 if self._m_runMusic and self._m_Music:
                     if event.key == SDLK_1 and self._m_Music._m_CurrentNote._m_speed != 1:
                         self._m_Music._m_CurrentNote._m_speed = 1
-                        self._m_Music._m_CurrentNote._NotePosition(True)
+                        self._m_Music._m_CurrentNote._NotePosition()
                     elif event.key == SDLK_2 and self._m_Music._m_CurrentNote._m_speed != 2:
                         self._m_Music._m_CurrentNote._m_speed = 2
-                        self._m_Music._m_CurrentNote._NotePosition(True)
+                        self._m_Music._m_CurrentNote._NotePosition()
                     elif event.key == SDLK_3 and self._m_Music._m_CurrentNote._m_speed != 3:
                         self._m_Music._m_CurrentNote._m_speed = 3
-                        self._m_Music._m_CurrentNote._NotePosition(True)
+                        self._m_Music._m_CurrentNote._NotePosition()
                     elif event.key == SDLK_4 and self._m_Music._m_CurrentNote._m_speed != 4:
                         self._m_Music._m_CurrentNote._m_speed = 4
-                        self._m_Music._m_CurrentNote._NotePosition(True)
+                        self._m_Music._m_CurrentNote._NotePosition()
                     elif event.key == SDLK_5 and self._m_Music._m_CurrentNote._m_speed != 5:
                         self._m_Music._m_CurrentNote._m_speed = 5
-                        self._m_Music._m_CurrentNote._NotePosition(True)
+                        self._m_Music._m_CurrentNote._NotePosition()
 
 
 
