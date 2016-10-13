@@ -36,6 +36,21 @@ noteconf
     print(self._m_PlayingTime)
 
 
+    #for keyidx in range(self._m_keynum):
+        #    if self._m_Notelist[keyidx][self._m_judgeidx] < 126:
+        #        self.notechk += 1
+#
+        #if self.notechk == self._m_keynum:
+        #    #print(self._m_Notelist[0][self._m_judgeidx],
+        #     #     self._m_Notelist[1][self._m_judgeidx],
+        #     #     self._m_Notelist[2][self._m_judgeidx],
+        #     #     self._m_Notelist[3][self._m_judgeidx])
+        #    for keyidx in range(self._m_keynum):
+        #        self._m_Notelist[keyidx][self._m_judgeidx] = 0
+        #    self._m_judgeidx += 1
+        #self.notechk = 0
+
+
 
 
         #self._m_PlayingTime += Acctime

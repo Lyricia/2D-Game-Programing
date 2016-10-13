@@ -21,6 +21,7 @@ class Framework:
 
     _m_CurrentScene = None
 
+    _m_updateFlag = False
     def event_handler(self):
         events=get_events()
 
@@ -64,22 +65,17 @@ class Framework:
                         self._m_Music._m_CurrentNote._NotePosition()
 
 
-
-
-
     def _create(self):
         open_canvas(800,760)
         self._m_CurrentScene = 'Menu'
-
-
 
     def _update(self):
         self.event_handler()
         if self._m_runMusic == True:
             if self._m_Music == None:
                 self._m_Music = MusicConf.Music('Evans')
-            elif self._m_Music:
-                self._m_Music._m_CurrentNote.UpdateNote(self._m_AccTime)
+                self._m_updateFlag = True
+#            elif self._m_Music:
                 #self._m_Music._m_CurrentNote.notejudgechk()
             if self._m_Music.MusicFinished():
                 print("end")
@@ -87,8 +83,6 @@ class Framework:
                 del (self._m_Music)
                 self._m_runMusic = False
                 self._m_CurrentScene = 'Menu'
-
-
 
     def _draw(self):
         if self._m_CurrentScene:
@@ -110,6 +104,10 @@ class Framework:
         self._m_PrevTime = time.time()
         while self._m_State:
             self._m_CurrentTime = time.time()
+
+            if self._m_updateFlag is True:
+                self._m_Music._m_CurrentNote.NoteTimer(self._m_PrevTime, self._m_CurrentTime)
+
             self._m_AccTime += self._m_CurrentTime - self._m_PrevTime
             self._m_PrevTime = self._m_CurrentTime
             if self._m_AccTime > self._m_FPS_MAX:       # draw when fps over
