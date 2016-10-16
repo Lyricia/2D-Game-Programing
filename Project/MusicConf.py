@@ -40,7 +40,7 @@ class Music:
 
         self._m_PlayingSong = load_music('Resources\\Song\\%s' %self._m_CurrentSongTitle)
         self._m_CurrentNote = Note(self._m_CurrentNote, self._m_CurrentSongBPM)
-        self._m_PlayingSong.set_volume(20)
+        self._m_PlayingSong.set_volume(100)
         self._m_PlayingSong.play()
 
 

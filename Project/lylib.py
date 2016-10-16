@@ -25,6 +25,7 @@ def searchfile(target):
             return True
         else:
             Mbox("CANNOT FIND NOTEFILE", "CANNOT FIND NOTEFILE\n %s\nPlz Chk Note dir" % targetnote, 0)
+            return False
     else:
         Mbox("CANNOT FIND SONG", "CANNOT FIND SONG\n %s\nPlz Chk Music dir" % targetsong, 0)
         return False

@@ -21,8 +21,7 @@ class Framework:
 
     _m_CurrentScene = None
 
-    _m_updateFlag = False
-    def event_handler(self):
+    def event_handler(self):        # not in progress, should separate to 'input manager'
         events=get_events()
 
         for event in events:
@@ -45,6 +44,7 @@ class Framework:
                     self._m_CurrentScene = 'Menu'
 
                 elif event.key == SDLK_e and self._m_runMusic:
+                    #self._m_Music._m_CurrentNote.UpdateNote()
                     self._m_Music._m_CurrentNote.notejudgechk()
 
                 if self._m_runMusic and self._m_Music:
@@ -73,10 +73,7 @@ class Framework:
         self.event_handler()
         if self._m_runMusic == True:
             if self._m_Music == None:
-                self._m_Music = MusicConf.Music('Evans')
-                self._m_updateFlag = True
-#            elif self._m_Music:
-                #self._m_Music._m_CurrentNote.notejudgechk()
+                self._m_Music = MusicConf.Music('180BPM')
             if self._m_Music.MusicFinished():
                 print("end")
                 self._m_Music.MusicStop()
@@ -104,13 +101,12 @@ class Framework:
         self._m_PrevTime = time.time()
         while self._m_State:
             self._m_CurrentTime = time.time()
-
-            if self._m_updateFlag is True:
+            if self._m_Music is not None:
                 self._m_Music._m_CurrentNote.NoteTimer(self._m_PrevTime, self._m_CurrentTime)
 
             self._m_AccTime += self._m_CurrentTime - self._m_PrevTime
             self._m_PrevTime = self._m_CurrentTime
-            if self._m_AccTime > self._m_FPS_MAX:       # draw when fps over
+            if self._m_AccTime > self._m_FPS_MAX:       # draw when time over fps
                 self._update()
                 self._draw()
                 self._m_AccTime -= self._m_FPS_MAX
