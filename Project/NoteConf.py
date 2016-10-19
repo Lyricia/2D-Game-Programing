@@ -52,10 +52,10 @@ class Note:
         for keyidx in range(self._m_keynum):
             for idx in range(len(self._m_Notelist[0])):
                 if self._m_Notelist[keyidx][idx] != 0:
-                    self._m_Notelist[keyidx][idx] = 159 \
+                    self._m_Notelist[keyidx][idx] = (float)(159 \
                                                     + (60 * idx * self._m_speed) \
                                                     - (60 * self._m_CurrentNoteIdx * self._m_speed) \
-                                                    + self._m_ElapsedVal
+                                                    + self._m_ElapsedVal)
 
     def UpdateNote(self):
         for keyidx in range(self._m_keynum):

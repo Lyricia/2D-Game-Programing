@@ -2,7 +2,8 @@ from lylib import *
 
 import MusicConf
 import PlayScene
-import Menu
+import MenuScene
+import TimerConf
 
 class Framework:
 
@@ -41,7 +42,7 @@ class Framework:
                     self._m_Music.MusicStop()
                     del(self._m_Music)
                     self._m_runMusic = False
-                    self._m_CurrentScene = 'Menu'
+                    self._m_CurrentScene = 'MenuScene'
 
                 elif event.key == SDLK_e and self._m_runMusic:
                     #self._m_Music._m_CurrentNote.UpdateNote()
@@ -67,31 +68,33 @@ class Framework:
 
     def _create(self):
         open_canvas(800,760)
-        self._m_CurrentScene = 'Menu'
+        self._m_CurrentScene = 'MenuScene'
+        self.SpriteTimer = TimerConf.Timer()
 
     def _update(self):
         self.event_handler()
         if self._m_runMusic == True:
             if self._m_Music == None:
-                self._m_Music = MusicConf.Music('180BPM')
+                self._m_Music = MusicConf.Music('120BPM')
             if self._m_Music.MusicFinished():
                 print("end")
                 self._m_Music.MusicStop()
                 del (self._m_Music)
                 self._m_runMusic = False
-                self._m_CurrentScene = 'Menu'
+                self._m_CurrentScene = 'MenuScene'
 
     def _draw(self):
         if self._m_CurrentScene:
            self._scenesetup()
            self._m_CurrentScene.sceneupdate()
-        pass
+        else:
+            pass
 
     def _scenesetup(self):
         if self._m_CurrentScene == 'PlayScene':
             self._m_CurrentScene = PlayScene.PlayScene(self._m_Music)
-        if self._m_CurrentScene == 'Menu':
-            self._m_CurrentScene = Menu.MenuScene()
+        if self._m_CurrentScene == 'MenuScene':
+            self._m_CurrentScene = MenuScene.MenuScene()
 
 
 
@@ -106,6 +109,7 @@ class Framework:
 
             self._m_AccTime += self._m_CurrentTime - self._m_PrevTime
             self._m_PrevTime = self._m_CurrentTime
+            self.SpriteTimer.SpriteTimeUpdate()
             if self._m_AccTime > self._m_FPS_MAX:       # draw when time over fps
                 self._update()
                 self._draw()
