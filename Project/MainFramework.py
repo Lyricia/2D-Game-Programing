@@ -4,6 +4,7 @@ import MusicConf
 import PlayScene
 import MenuScene
 import TimerConf
+import SpriteConf
 
 class Framework:
 
@@ -69,7 +70,7 @@ class Framework:
     def _create(self):
         open_canvas(800,760)
         self._m_CurrentScene = 'MenuScene'
-        self.SpriteTimer = TimerConf.Timer()
+        self.SpriteTimer = SpriteConf.Sprite()
 
     def _update(self):
         self.event_handler()
@@ -109,7 +110,7 @@ class Framework:
 
             self._m_AccTime += self._m_CurrentTime - self._m_PrevTime
             self._m_PrevTime = self._m_CurrentTime
-            self.SpriteTimer.SpriteTimeUpdate()
+            self.SpriteTimer.SpriteTimer(self._m_CurrentTime,self._m_PrevTime)
             if self._m_AccTime > self._m_FPS_MAX:       # draw when time over fps
                 self._update()
                 self._draw()
