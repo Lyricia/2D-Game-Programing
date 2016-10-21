@@ -23,6 +23,7 @@ class Framework:
 
     _m_CurrentScene = None
 
+    _m_musicname = None
     def event_handler(self):        # not in progress, should separate to 'input manager'
         events=get_events()
 
@@ -38,12 +39,24 @@ class Framework:
                 elif event.key == SDLK_s:
                     if self._m_runMusic == False :
                         self._m_runMusic = True
+                        self._m_musicname = '120BPM'
+                        self._m_CurrentScene = 'PlayScene'
+                elif event.key == SDLK_d:
+                    if self._m_runMusic == False:
+                        self._m_runMusic = True
+                        self._m_musicname = 'Evans'
+                        self._m_CurrentScene = 'PlayScene'
+                elif event.key == SDLK_a:
+                    if self._m_runMusic == False:
+                        self._m_runMusic = True
+                        self._m_musicname = '180BPM'
                         self._m_CurrentScene = 'PlayScene'
                 elif event.key == SDLK_m:
-                    self._m_Music.MusicStop()
-                    del(self._m_Music)
-                    self._m_runMusic = False
-                    self._m_CurrentScene = 'MenuScene'
+                    if self._m_runMusic == True:
+                        self._m_Music.MusicStop()
+                        del(self._m_Music)
+                        self._m_runMusic = False
+                        self._m_CurrentScene = 'MenuScene'
 
                 elif event.key == SDLK_e and self._m_runMusic:
                     #self._m_Music._m_CurrentNote.UpdateNote()
@@ -76,7 +89,7 @@ class Framework:
         self.event_handler()
         if self._m_runMusic == True:
             if self._m_Music == None:
-                self._m_Music = MusicConf.Music('120BPM')
+                self._m_Music = MusicConf.Music(self._m_musicname)
             if self._m_Music.MusicFinished():
                 print("end")
                 self._m_Music.MusicStop()

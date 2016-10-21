@@ -8,7 +8,7 @@ import SpriteConf
 class Note:
 
     _m_speed = 1
-    _m_keynum = 1
+    _m_keynum = 4
     _m_judgeidx = 0
     _m_ElapsedVal = 0
     _m_CurrentNoteIdx = 0
@@ -96,3 +96,6 @@ class Note:
             if 125 < self._m_Notelist[0][idx] < 175:
                 print('pass')
         pass
+
+    def __del__(self):
+        del self._m_Notelist
