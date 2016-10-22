@@ -3,8 +3,8 @@ from lylib import *
 import MusicConf
 import PlayScene
 import MenuScene
-import TimerConf
 import SpriteConf
+import InputManager
 
 class Framework:
 
@@ -86,7 +86,8 @@ class Framework:
         self._m_CurrentScene = 'MenuScene'
 
     def _update(self):
-        self.event_handler()
+        #self.event_handler()
+        InputManager.event_handler()
         if self._m_runMusic == True:
             if self._m_Music == None:
                 self._m_Music = MusicConf.Music(self._m_musicname)
