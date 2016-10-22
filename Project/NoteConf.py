@@ -69,7 +69,7 @@ class Note:
 
 
 
-    def NoteTimer(self, prevtime, currenttime):
+    def NoteTimer(self, currenttime, prevtime):
         self._m_idxacctime += currenttime - prevtime
         self._m_posacctime += currenttime - prevtime
 
@@ -91,9 +91,9 @@ class Note:
 
 
 
-    def notejudgechk(self):
+    def notejudgechk(self,keynum):
         for idx in range(len(self._m_Notelist[0])):
-            if 125 < self._m_Notelist[0][idx] < 175:
+            if 125 < self._m_Notelist[keynum][idx] < 175:
                 print('pass')
         pass
 

@@ -8,7 +8,6 @@ class PlayScene:
     _m_note1_image = None
     _m_note2_image = None
     _m_effect_sprite = None
-    _m_sprite = None
     def __init__(self, Musicdata, Sprite):     # load music data
         self._m_Musicdata = Musicdata
         self._m_Notedata = Musicdata._m_CurrentNote._m_Notelist
@@ -28,7 +27,6 @@ class PlayScene:
         pass
 
     def sceneupdate(self):  # update play scene -> time update
-        clear_canvas()
         #print('scene update func')
         self._m_background_image.draw(400, 380)
         self._m_gear_image.draw(400, 380)
@@ -52,12 +50,12 @@ class PlayScene:
         if self._m_sprite[0].bSprite:
             for frameidx in range(self._m_sprite[0].SpriteFrame):
                 self._m_effect_sprite.clip_draw(self._m_sprite[0].SpriteFrame*192, 0, 192,192,283,159)
+                print(self._m_sprite[0].SpriteFrame)
         if self._m_sprite[1].bSprite:
             for frameidx in range(self._m_sprite[1].SpriteFrame):
-                self._m_effect_sprite.clip_draw(self._m_sprite[1].SpriteFrame*192, 0, 192,192,283,159)
+                self._m_effect_sprite.clip_draw(self._m_sprite[1].SpriteFrame*192, 0, 192,192,400,159)
 
 
-        update_canvas()
         pass
 
     def __del__(self):

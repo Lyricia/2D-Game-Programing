@@ -2,6 +2,7 @@ class Sprite:
 
     def __init__(self):
         #self.Timer = TimerConf.Timer()
+
         self.SpriteFrame = 0
         self._m_CurrentTime = 0.0
         self._m_PrevTime = 0.0
@@ -20,3 +21,5 @@ class Sprite:
             if self.SpriteFrame > 25:
                 self.bSprite = False
                 self.SpriteFrame = 0
+
+

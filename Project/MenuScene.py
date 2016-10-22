@@ -13,12 +13,10 @@ class MenuScene:
         pass
 
     def sceneupdate(self):  # update play scene -> time update
-        clear_canvas()
 
         #print('menu update func')
 
         self._m_background.draw(400, 380)
         self._m_menu.draw(400,380)
 
-        update_canvas()
         pass
