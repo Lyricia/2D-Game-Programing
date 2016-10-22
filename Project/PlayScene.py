@@ -13,6 +13,7 @@ class PlayScene:
         self._m_Musicdata = Musicdata
         self._m_Notedata = Musicdata._m_CurrentNote._m_Notelist
         self._m_sprite = Sprite
+
         if not self._m_background_image:
             self._m_background_image = load_image('Resources\\Image\\Background.png')
         if not self._m_gear_image:
@@ -41,9 +42,20 @@ class PlayScene:
                         elif keyidx % 2 == 1:
                             self._m_note2_image.draw(283 + 69 * keyidx, int(self._m_Notedata[keyidx][idx]))
 
-        if self._m_sprite.bSprite:
-            for frameidx in range(self._m_sprite.SpriteFrame):
-                self._m_effect_sprite.clip_draw(self._m_sprite.SpriteFrame*192, 0, 192,192,283,159)
+
+        for keyidx in range(self._m_Musicdata._m_CurrentNote._m_keynum):
+            if self._m_sprite[keyidx].bSprite:
+                for frameidx in range(self._m_sprite[keyidx].SpriteFrame):
+                    self._m_effect_sprite.clip_draw(self._m_sprite[keyidx].SpriteFrame * 192, 0, 192, 192, 283, 159)
+
+
+        if self._m_sprite[0].bSprite:
+            for frameidx in range(self._m_sprite[0].SpriteFrame):
+                self._m_effect_sprite.clip_draw(self._m_sprite[0].SpriteFrame*192, 0, 192,192,283,159)
+        if self._m_sprite[1].bSprite:
+            for frameidx in range(self._m_sprite[1].SpriteFrame):
+                self._m_effect_sprite.clip_draw(self._m_sprite[1].SpriteFrame*192, 0, 192,192,283,159)
+
 
         update_canvas()
         pass
