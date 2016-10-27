@@ -24,6 +24,7 @@ class Framework:
     _m_CurrentScene = None
 
     _m_musicname = None
+
     def event_handler(self):        # not in progress, should separate to 'input manager'
         events=get_events()
 
@@ -67,7 +68,7 @@ class Framework:
                     if event.key == SDLK_r :
                         self._m_Music._m_CurrentNote.notejudgechk()
                         self._m_SpriteTimer[1].bSprite = True
-                    if event.key == SDLK_u:
+                    if event.key == SDLK_u :
                         self._m_Music._m_CurrentNote.notejudgechk()
                         self._m_SpriteTimer[2].bSprite = True
                     if event.key == SDLK_i :
@@ -134,9 +135,26 @@ class Framework:
                 if event.key == SDLK_q:
                     self._m_State = False
 
+                if self._m_runMusic and self._m_Music:
+                    if event.key == SDLK_1 and self._m_Music._m_CurrentNote._m_speed != 1:
+                        self._m_Music._m_CurrentNote._m_speed = 1
+                        self._m_Music._m_CurrentNote._NotePosition()
+                    elif event.key == SDLK_2 and self._m_Music._m_CurrentNote._m_speed != 2:
+                        self._m_Music._m_CurrentNote._m_speed = 2
+                        self._m_Music._m_CurrentNote._NotePosition()
+                    elif event.key == SDLK_3 and self._m_Music._m_CurrentNote._m_speed != 3:
+                        self._m_Music._m_CurrentNote._m_speed = 3
+                        self._m_Music._m_CurrentNote._NotePosition()
+                    elif event.key == SDLK_4 and self._m_Music._m_CurrentNote._m_speed != 4:
+                        self._m_Music._m_CurrentNote._m_speed = 4
+                        self._m_Music._m_CurrentNote._NotePosition()
+                    elif event.key == SDLK_5 and self._m_Music._m_CurrentNote._m_speed != 5:
+                        self._m_Music._m_CurrentNote._m_speed = 5
+                        self._m_Music._m_CurrentNote._NotePosition()
+
     def _create(self):
         open_canvas(800,760)
-        self._m_InputManager = InputManager.InputManager()
+        #self._m_InputManager = InputManager.InputManager()
         self._m_CurrentScene = 'MenuScene'
 
     def _update(self):

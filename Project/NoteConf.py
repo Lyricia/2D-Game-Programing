@@ -73,19 +73,12 @@ class Note:
         self._m_idxacctime += currenttime - prevtime
         self._m_posacctime += currenttime - prevtime
 
-        if self._m_idxacctime > 60.0 / float(self._m_SongBPM):
+        if self._m_idxacctime > 60.0 / float(self._m_SongBPM):      #timer to count Current Beat Note Index
             self._m_CurrentNoteIdx += 1
             self._m_idxacctime -= 60.0 / float(self._m_SongBPM)
-            #print(self._m_Notelist[0][self._m_CurrentNoteIdx],
-            #      self._m_Notelist[1][self._m_CurrentNoteIdx],
-            #      self._m_Notelist[2][self._m_CurrentNoteIdx],
-            #      self._m_Notelist[3][self._m_CurrentNoteIdx]
-            #      )
 
-        if self._m_posacctime > 1 / float(self._m_SongBPM):
+        if self._m_posacctime > 1 / float(self._m_SongBPM):         #Timer Move note 1 pixel per 1/BPM sec
             self.UpdateNote()
-
-            #print(self._m_posacctime, self._m_idxacctime, self._m_CurrentNoteIdx)
             self._m_posacctime -= 1 / float(self._m_SongBPM)
 
 
@@ -95,7 +88,7 @@ class Note:
         for idx in range(len(self._m_Notelist[0])):
             if 125 < self._m_Notelist[keynum][idx] < 175:
                 print('pass')
-        pass
+                self._m_Notelist[keynum][idx] = 0
 
     def __del__(self):
         del self._m_Notelist
