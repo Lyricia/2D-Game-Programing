@@ -100,7 +100,7 @@ class Framework:
                 if event.key is SDLK_c:
                     print('c')
 
-    def event(self):
+    def handle_event(self):
         self.keys = SDL_GetKeyboardState(None)
 
         self.bKeyDown = False
@@ -158,7 +158,7 @@ class Framework:
         self._m_CurrentScene = 'MenuScene'
 
     def _update(self):
-        self.event()
+        self.handle_event()
         #self._m_InputManager.event()
         if self._m_runMusic == True:
             if self._m_Music == None:

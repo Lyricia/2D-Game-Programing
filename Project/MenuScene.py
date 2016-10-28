@@ -12,6 +12,9 @@ class MenuScene:
         self._m_menu = load_image('Resources\\Image\\menu.png')
         pass
 
+    def handle_event(self):
+        pass
+
     def sceneupdate(self):  # update play scene -> time update
 
         #print('menu update func')
