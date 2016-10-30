@@ -11,39 +11,48 @@ class PlayScene:
     _m_effect_sprite = None
 
 
-    def __init__(self, Musicdata, Sprite):     # load music data
+    def __init__(self, MusicData, Sprite):     # load music data
         #self._m_Musicdata = Musicdata
-        self._m_Musicdata = MusicConf.Music('Evans')
-        self._m_Notedata = Musicdata._m_CurrentNote._m_Notelist
+        self._m_Musicdata = MusicData
+        self._m_Notedata = MusicData._m_CurrentNote._m_Notelist
         self._m_sprite = Sprite
         self._m_keys = []
 
         self.image_load()
 
     def handle_event(self):
-        self.keys = SDL_GetKeyboardState(None)
+        self._m_keys = SDL_GetKeyboardState(None)
 
         self.bKeyDown = False
 
-        if self.keys[SDL_SCANCODE_S]:
-            if self._m_runMusic == False:
-                self._m_runMusic = True
-                self._m_musicname = '120BPM'
-                self._m_CurrentScene = 'PlayScene'
+        if self._m_keys[SDL_SCANCODE_E] :
+            self._m_Musicdata._m_CurrentNote.notejudgechk(0)
+            self._m_sprite[0].bSprite = True
+        if self._m_keys[SDL_SCANCODE_R] :
+            self._m_Musicdata._m_CurrentNote.notejudgechk(1)
+            self._m_sprite[1].bSprite = True
+        if self._m_keys[SDL_SCANCODE_U] :
+            self._m_Musicdata._m_CurrentNote.notejudgechk(2)
+            self._m_sprite[2].bSprite = True
+        if self._m_keys[SDL_SCANCODE_I] :
+            self._m_Musicdata._m_CurrentNote.notejudgechk(3)
+            self._m_sprite[3].bSprite = True
 
-        if self._m_runMusic:
-            if self.keys[SDL_SCANCODE_E] and not self.bKeyDown:
-                self._m_MusicData._m_CurrentNote.notejudgechk(0)
-                self._m_SpriteTimer[0].bSprite = True
-            if self.keys[SDL_SCANCODE_R] and not self.bKeyDown:
-                self._m_Music._m_CurrentNote.notejudgechk(1)
-                self._m_SpriteTimer[1].bSprite = True
-            if self.keys[SDL_SCANCODE_U] and not self.bKeyDown:
-                self._m_Music._m_CurrentNote.notejudgechk(2)
-                self._m_SpriteTimer[2].bSprite = True
-            if self.keys[SDL_SCANCODE_I] and not self.bKeyDown:
-                self._m_Music._m_CurrentNote.notejudgechk(3)
-                self._m_SpriteTimer[3].bSprite = True
+        if self._m_keys[SDL_SCANCODE_1] and self._m_Musicdata._m_CurrentNote._m_speed != 1:
+            self._m_Musicdata._m_CurrentNote._m_speed = 1
+            self._m_Musicdata._m_CurrentNote._NotePosition()
+        elif self._m_keys[SDL_SCANCODE_2] and self._m_Musicdata._m_CurrentNote._m_speed != 2:
+            self._m_Musicdata._m_CurrentNote._m_speed = 2
+            self._m_Musicdata._m_CurrentNote._NotePosition()
+        elif self._m_keys[SDL_SCANCODE_3] and self._m_Musicdata._m_CurrentNote._m_speed != 3:
+            self._m_Musicdata._m_CurrentNote._m_speed = 3
+            self._m_Musicdata._m_CurrentNote._NotePosition()
+        elif self._m_keys[SDL_SCANCODE_4] and self._m_Musicdata._m_CurrentNote._m_speed != 4:
+            self._m_Musicdata._m_CurrentNote._m_speed = 4
+            self._m_Musicdata._m_CurrentNote._NotePosition()
+        elif self._m_keys[SDL_SCANCODE_5] and self._m_Musicdata._m_CurrentNote._m_speed != 5:
+            self._m_Musicdata._m_CurrentNote._m_speed = 5
+            self._m_Musicdata._m_CurrentNote._NotePosition()
 
         events = get_events()
         for event in events:
@@ -54,24 +63,7 @@ class PlayScene:
                     self._m_State = False
                 if event.key == SDLK_q:
                     self._m_State = False
-
-                if self._m_runMusic and self._m_Music:
-                    if event.key == SDLK_1 and self._m_Music._m_CurrentNote._m_speed != 1:
-                        self._m_Music._m_CurrentNote._m_speed = 1
-                        self._m_Music._m_CurrentNote._NotePosition()
-                    elif event.key == SDLK_2 and self._m_Music._m_CurrentNote._m_speed != 2:
-                        self._m_Music._m_CurrentNote._m_speed = 2
-                        self._m_Music._m_CurrentNote._NotePosition()
-                    elif event.key == SDLK_3 and self._m_Music._m_CurrentNote._m_speed != 3:
-                        self._m_Music._m_CurrentNote._m_speed = 3
-                        self._m_Music._m_CurrentNote._NotePosition()
-                    elif event.key == SDLK_4 and self._m_Music._m_CurrentNote._m_speed != 4:
-                        self._m_Music._m_CurrentNote._m_speed = 4
-                        self._m_Music._m_CurrentNote._NotePosition()
-                    elif event.key == SDLK_5 and self._m_Music._m_CurrentNote._m_speed != 5:
-                        self._m_Music._m_CurrentNote._m_speed = 5
-                        self._m_Music._m_CurrentNote._NotePosition()
-        pass
+                
 
     def image_load(self):
         if not self._m_background_image:
@@ -89,6 +81,8 @@ class PlayScene:
 
     def sceneupdate(self):  # update play scene -> time update
         #print('scene update func')
+        self.handle_event()
+
         self._m_background_image.draw(400, 380)
         self._m_gear_image.draw(400, 380)
 

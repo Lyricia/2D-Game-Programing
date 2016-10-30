@@ -60,39 +60,6 @@ class Framework:
                         self._m_runMusic = False
                         self._m_CurrentScene = 'MenuScene'
 
-                if self._m_runMusic:
-                    if event.key == SDLK_e :
-                        #self._m_Music._m_CurrentNote.UpdateNote()
-                        self._m_Music._m_CurrentNote.notejudgechk()
-                        self._m_SpriteTimer[0].bSprite = True
-                    if event.key == SDLK_r :
-                        self._m_Music._m_CurrentNote.notejudgechk()
-                        self._m_SpriteTimer[1].bSprite = True
-                    if event.key == SDLK_u :
-                        self._m_Music._m_CurrentNote.notejudgechk()
-                        self._m_SpriteTimer[2].bSprite = True
-                    if event.key == SDLK_i :
-                        self._m_Music._m_CurrentNote.notejudgechk()
-                        self._m_SpriteTimer[3].bSprite = True
-
-
-                if self._m_runMusic and self._m_Music:
-                    if event.key == SDLK_1 and self._m_Music._m_CurrentNote._m_speed != 1:
-                        self._m_Music._m_CurrentNote._m_speed = 1
-                        self._m_Music._m_CurrentNote._NotePosition()
-                    elif event.key == SDLK_2 and self._m_Music._m_CurrentNote._m_speed != 2:
-                        self._m_Music._m_CurrentNote._m_speed = 2
-                        self._m_Music._m_CurrentNote._NotePosition()
-                    elif event.key == SDLK_3 and self._m_Music._m_CurrentNote._m_speed != 3:
-                        self._m_Music._m_CurrentNote._m_speed = 3
-                        self._m_Music._m_CurrentNote._NotePosition()
-                    elif event.key == SDLK_4 and self._m_Music._m_CurrentNote._m_speed != 4:
-                        self._m_Music._m_CurrentNote._m_speed = 4
-                        self._m_Music._m_CurrentNote._NotePosition()
-                    elif event.key == SDLK_5 and self._m_Music._m_CurrentNote._m_speed != 5:
-                        self._m_Music._m_CurrentNote._m_speed = 5
-                        self._m_Music._m_CurrentNote._NotePosition()
-
                 if event.key is SDLK_z:
                     print('z')
                 if event.key is SDLK_x:
@@ -111,19 +78,6 @@ class Framework:
                 self._m_musicname = '120BPM'
                 self._m_CurrentScene = 'PlayScene'
 
-        if self._m_runMusic:
-            if self.keys[SDL_SCANCODE_E] and not self.bKeyDown:
-                self._m_Music._m_CurrentNote.notejudgechk(0)
-                self._m_SpriteTimer[0].bSprite = True
-            if self.keys[SDL_SCANCODE_R] and not self.bKeyDown:
-                self._m_Music._m_CurrentNote.notejudgechk(1)
-                self._m_SpriteTimer[1].bSprite = True
-            if self.keys[SDL_SCANCODE_U] and not self.bKeyDown:
-                self._m_Music._m_CurrentNote.notejudgechk(2)
-                self._m_SpriteTimer[2].bSprite = True
-            if self.keys[SDL_SCANCODE_I] and not self.bKeyDown:
-                self._m_Music._m_CurrentNote.notejudgechk(3)
-                self._m_SpriteTimer[3].bSprite = True
 
         events = get_events()
         for event in events:
@@ -134,23 +88,6 @@ class Framework:
                     self._m_State = False
                 if event.key == SDLK_q:
                     self._m_State = False
-
-                if self._m_runMusic and self._m_Music:
-                    if event.key == SDLK_1 and self._m_Music._m_CurrentNote._m_speed != 1:
-                        self._m_Music._m_CurrentNote._m_speed = 1
-                        self._m_Music._m_CurrentNote._NotePosition()
-                    elif event.key == SDLK_2 and self._m_Music._m_CurrentNote._m_speed != 2:
-                        self._m_Music._m_CurrentNote._m_speed = 2
-                        self._m_Music._m_CurrentNote._NotePosition()
-                    elif event.key == SDLK_3 and self._m_Music._m_CurrentNote._m_speed != 3:
-                        self._m_Music._m_CurrentNote._m_speed = 3
-                        self._m_Music._m_CurrentNote._NotePosition()
-                    elif event.key == SDLK_4 and self._m_Music._m_CurrentNote._m_speed != 4:
-                        self._m_Music._m_CurrentNote._m_speed = 4
-                        self._m_Music._m_CurrentNote._NotePosition()
-                    elif event.key == SDLK_5 and self._m_Music._m_CurrentNote._m_speed != 5:
-                        self._m_Music._m_CurrentNote._m_speed = 5
-                        self._m_Music._m_CurrentNote._NotePosition()
 
     def _create(self):
         open_canvas(800,760)
