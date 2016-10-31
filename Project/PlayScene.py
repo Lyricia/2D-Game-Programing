@@ -9,6 +9,7 @@ class PlayScene:
     _m_note1_image = None
     _m_note2_image = None
     _m_effect_sprite = None
+    _m_scorefont = None
 
 
     def __init__(self, MusicData, Sprite):     # load music data
@@ -77,6 +78,9 @@ class PlayScene:
         if not self._m_effect_sprite:
             self._m_effect_sprite = load_image('Resources\\Image\\effect.png')
             self._m_effect_sprite.opacify(0.1)
+        if not self._m_scorefont:
+            self._m_scorefont = load_font('Resources\\Fonts\\Score.ttf',30)
+
         pass
 
     def sceneupdate(self):  # update play scene -> time update
@@ -100,6 +104,8 @@ class PlayScene:
                     self._m_effect_sprite.clip_draw(self._m_sprite[keyidx].SpriteFrame * 192, 0, 192, 192,
                                                     283 + (70 * keyidx), 155,
                                                     120, 120)
+
+            self._m_scorefont.draw(30, 100,str(self._m_Musicdata._m_CurrentNote._m_score) ,(255, 255, 255))
 
     def __del__(self):
         del (self._m_background_image)

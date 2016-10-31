@@ -37,21 +37,7 @@ class Framework:
                     self._m_State=False
                 if event.key == SDLK_q:
                     self._m_State = False
-                if event.key == SDLK_s:
-                    if self._m_runMusic == False :
-                        self._m_runMusic = True
-                        self._m_musicname = '120BPM'
-                        self._m_CurrentScene = 'PlayScene'
-                if event.key == SDLK_d:
-                    if self._m_runMusic == False:
-                        self._m_runMusic = True
-                        self._m_musicname = 'Evans'
-                        self._m_CurrentScene = 'PlayScene'
-                if event.key == SDLK_a:
-                    if self._m_runMusic == False:
-                        self._m_runMusic = True
-                        self._m_musicname = '180BPM'
-                        self._m_CurrentScene = 'PlayScene'
+
 
                 if event.key == SDLK_m:
                     if self._m_runMusic == True:
@@ -77,6 +63,19 @@ class Framework:
                 self._m_runMusic = True
                 self._m_musicname = '120BPM'
                 self._m_CurrentScene = 'PlayScene'
+
+        if self.keys[SDL_SCANCODE_D]:
+            if self._m_runMusic == False:
+                self._m_runMusic = True
+                self._m_musicname = 'Evans'
+                self._m_CurrentScene = 'PlayScene'
+
+        if self.keys[SDL_SCANCODE_A]:
+            if self._m_runMusic == False:
+                self._m_runMusic = True
+                self._m_musicname = '180BPM'
+                self._m_CurrentScene = 'PlayScene'
+
 
 
         events = get_events()
@@ -124,7 +123,6 @@ class Framework:
             self._m_CurrentScene = PlayScene.PlayScene(self._m_Music, self._m_SpriteTimer)
         if self._m_CurrentScene == 'MenuScene':
             self._m_CurrentScene = MenuScene.MenuScene()
-
 
 
     def run(self):

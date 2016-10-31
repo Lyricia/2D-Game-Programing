@@ -13,6 +13,7 @@ class Note:
     _m_ElapsedVal = 0
     _m_CurrentNoteIdx = 0
     _m_calljudgeSpriteTimer = None
+    _m_score = 0
 
     notechk = 0
 
@@ -88,6 +89,7 @@ class Note:
         for idx in range(len(self._m_Notelist[0])):
             if 125 < self._m_Notelist[keynum][idx] < 175:
                 print('pass')
+                self._m_score += int(abs(195 - self._m_Notelist[keynum][idx]) * 10)
                 self._m_Notelist[keynum][idx] = 0
 
     def __del__(self):
