@@ -57,8 +57,10 @@ class PlayScene:
             self._m_Musicdata._m_CurrentNote._NotePosition()
 
         if self._m_keys[SDL_SCANCODE_M]:
+            self.call_fw._m_Music.MusicStop()
+            del(self.call_fw._m_Music)
+            self.call_fw._m_runMusic = False
             self.call_fw.switchscene('MenuScene')
-            self.call_fw._m_runmusic = False
 
     def image_load(self):
         if not self._m_background_image:
