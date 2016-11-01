@@ -12,12 +12,13 @@ class PlayScene:
     _m_scorefont = None
 
 
-    def __init__(self, MusicData, Sprite):     # load music data
+    def __init__(self, MusicData, Sprite, pt_Framework):     # load music data
         #self._m_Musicdata = Musicdata
         self._m_Musicdata = MusicData
         self._m_Notedata = MusicData._m_CurrentNote._m_Notelist
         self._m_sprite = Sprite
         self._m_keys = []
+        self.call_fw = pt_Framework
 
         self.image_load()
 
@@ -55,16 +56,9 @@ class PlayScene:
             self._m_Musicdata._m_CurrentNote._m_speed = 5
             self._m_Musicdata._m_CurrentNote._NotePosition()
 
-        events = get_events()
-        for event in events:
-            if event.type == SDL_QUIT:
-                self._m_State = False
-            elif event.type == SDL_KEYDOWN:
-                if event.key == SDLK_ESCAPE:
-                    self._m_State = False
-                if event.key == SDLK_q:
-                    self._m_State = False
-                
+        if self._m_keys[SDL_SCANCODE_M]:
+            self.call_fw.switchscene('MenuScene')
+            self.call_fw._m_runmusic = False
 
     def image_load(self):
         if not self._m_background_image:
@@ -81,7 +75,6 @@ class PlayScene:
         if not self._m_scorefont:
             self._m_scorefont = load_font('Resources\\Fonts\\Score.ttf',30)
 
-        pass
 
     def sceneupdate(self):  # update play scene -> time update
         #print('scene update func')
@@ -89,6 +82,8 @@ class PlayScene:
 
         self._m_background_image.draw(400, 380)
         self._m_gear_image.draw(400, 380)
+
+
 
         for keyidx in range(4):
             for idx in range(len(self._m_Notedata[keyidx])):
@@ -105,7 +100,7 @@ class PlayScene:
                                                     283 + (70 * keyidx), 155,
                                                     120, 120)
 
-            self._m_scorefont.draw(30, 100,str(self._m_Musicdata._m_CurrentNote._m_score) ,(255, 255, 255))
+        self._m_scorefont.draw(30, 100,str(self._m_Musicdata._m_CurrentNote._m_score) ,(255, 255, 255))
 
     def __del__(self):
         del (self._m_background_image)

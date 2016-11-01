@@ -4,7 +4,6 @@ import MusicConf
 import PlayScene
 import MenuScene
 import SpriteConf
-import InputManager
 
 class Framework:
 
@@ -24,34 +23,6 @@ class Framework:
     _m_CurrentScene = None
 
     _m_musicname = None
-
-    def event_handler(self):        # not in progress, should separate to 'input manager'
-        events=get_events()
-
-        for event in events:
-            if event.type == SDL_QUIT:
-                self._m_State=False
-
-            elif event.type == SDL_KEYDOWN:
-                if event.key == SDLK_ESCAPE:
-                    self._m_State=False
-                if event.key == SDLK_q:
-                    self._m_State = False
-
-
-                if event.key == SDLK_m:
-                    if self._m_runMusic == True:
-                        self._m_Music.MusicStop()
-                        del(self._m_Music)
-                        self._m_runMusic = False
-                        self._m_CurrentScene = 'MenuScene'
-
-                if event.key is SDLK_z:
-                    print('z')
-                if event.key is SDLK_x:
-                    print('x')
-                if event.key is SDLK_c:
-                    print('c')
 
     def handle_event(self):
         self.keys = SDL_GetKeyboardState(None)
@@ -90,12 +61,10 @@ class Framework:
 
     def _create(self):
         open_canvas(800,760)
-        #self._m_InputManager = InputManager.InputManager()
         self._m_CurrentScene = 'MenuScene'
 
     def _update(self):
         self.handle_event()
-        #self._m_InputManager.event()
         if self._m_runMusic == True:
             if self._m_Music == None:
                 self._m_Music = MusicConf.Music(self._m_musicname)
@@ -108,19 +77,20 @@ class Framework:
 
     def _draw(self):
         clear_canvas()
-        if self._m_CurrentScene:
-           self._scenesetup()
-           self._m_CurrentScene.sceneupdate()
+        if self._m_CurrentScene is not None:
+            self.switchscene(self._m_CurrentScene)
+            self._m_CurrentScene.sceneupdate()
         else:
             pass
         update_canvas()
 
-    def _scenesetup(self):
+    def switchscene(self, Scenename):
+        self._m_CurrentScene = Scenename
         if self._m_CurrentScene == 'PlayScene':
             self._m_SpriteTimer = list()
             for idx in range(0, 4):
                 self._m_SpriteTimer.append(SpriteConf.Sprite())
-            self._m_CurrentScene = PlayScene.PlayScene(self._m_Music, self._m_SpriteTimer)
+            self._m_CurrentScene = PlayScene.PlayScene(self._m_Music, self._m_SpriteTimer, self)
         if self._m_CurrentScene == 'MenuScene':
             self._m_CurrentScene = MenuScene.MenuScene()
 
