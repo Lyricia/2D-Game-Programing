@@ -53,9 +53,9 @@ class Note:
         for keyidx in range(self._m_keynum):
             for idx in range(len(self._m_Notelist[0])):
                 if self._m_Notelist[keyidx][idx] != 0:
-                    self._m_Notelist[keyidx][idx] = (float)(159 \
-                                                    + (60 * idx * self._m_speed) \
-                                                    - (60 * self._m_CurrentNoteIdx * self._m_speed) \
+                    self._m_Notelist[keyidx][idx] = (float)(159                                         \
+                                                    + (60 * idx * self._m_speed)                        \
+                                                    - (60 * self._m_CurrentNoteIdx * self._m_speed)     \
                                                     + self._m_ElapsedVal)
 
     def UpdateNote(self):
@@ -63,7 +63,7 @@ class Note:
             for tmp in range(len(self._m_Notelist[0])):
                 if self._m_Notelist[keyidx][tmp] > 10 - 1 * self._m_speed and self._m_Notelist[keyidx][tmp] != 0:
                     self._m_Notelist[keyidx][tmp] -= 1 * self._m_speed
-                    self._m_ElapsedVal = (self._m_ElapsedVal + 1 * self._m_speed) % (60 * self._m_speed)
+                    self._m_ElapsedVal = ((self._m_ElapsedVal + 1) * self._m_speed) % (60 * self._m_speed)
                     #print(self._m_ElapsedVal)
                 if self._m_Notelist[keyidx][tmp] < 126:
                     self._m_Notelist[keyidx][tmp] = 0

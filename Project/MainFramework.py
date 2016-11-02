@@ -48,7 +48,6 @@ class Framework:
                 self._m_CurrentScene = 'PlayScene'
 
 
-
         events = get_events()
         for event in events:
             if event.type == SDL_QUIT:
