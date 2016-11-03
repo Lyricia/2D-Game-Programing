@@ -103,6 +103,7 @@ class PlayScene:
                                                     120, 120)
 
         self._m_scorefont.draw(30, 100,str(self._m_Musicdata._m_CurrentNote._m_score) ,(255, 255, 255))
+        self._m_scorefont.draw(30, 150,str(self._m_Musicdata._m_CurrentNote._m_accuracy)+'%', (255, 255, 255))
 
     def __del__(self):
         del (self._m_background_image)

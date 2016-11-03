@@ -28,7 +28,7 @@ class Note:
 
         self._NotePosition()
         self._m_ElapsedVal = 0
-
+        self._m_accuracy = 0
         self._m_CurrentNoteIdx = 0
         self._m_calljudgeSpriteTimer = SpriteConf.Sprite()
 
@@ -53,7 +53,7 @@ class Note:
         for keyidx in range(self._m_keynum):
             for idx in range(len(self._m_Notelist[0])):
                 if self._m_Notelist[keyidx][idx] != 0:
-                    self._m_Notelist[keyidx][idx] = (float)(159                                         \
+                    self._m_Notelist[keyidx][idx] = (float)(145                                         \
                                                     + (60 * idx * self._m_speed)                        \
                                                     - (60 * self._m_CurrentNoteIdx * self._m_speed)     \
                                                     + self._m_ElapsedVal)
@@ -74,7 +74,7 @@ class Note:
         self._m_idxacctime += currenttime - prevtime
         self._m_posacctime += currenttime - prevtime
 
-        if self._m_idxacctime > 60.0 / float(self._m_SongBPM):      #timer to count Current Beat Note Index
+        if ((self._m_idxacctime > 60.0 / float(self._m_SongBPM)) and self._m_Notelist[0][0] < 145):      #timer to count Current Beat Note Index
             self._m_CurrentNoteIdx += 1
             self._m_idxacctime -= 60.0 / float(self._m_SongBPM)
 
@@ -87,9 +87,9 @@ class Note:
 
     def notejudgechk(self,keynum):
         for idx in range(len(self._m_Notelist[0])):
-            if 125 < self._m_Notelist[keynum][idx] < 175:
-                print('pass')
-                self._m_score += int(abs(195 - self._m_Notelist[keynum][idx]) * 10)
+            if 145 - 25 < self._m_Notelist[keynum][idx] < 145 + 25:
+                self._m_accuracy = int(100 - abs(145 - self._m_Notelist[keynum][idx]) * 4)
+                self._m_score += self._m_accuracy * 10
                 self._m_Notelist[keynum][idx] = 0
 
     def __del__(self):
