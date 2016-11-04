@@ -1,8 +1,8 @@
 class Sprite:
 
-    def __init__(self):
+    def __init__(self, spritename = 'effect'):
         #self.Timer = TimerConf.Timer()
-
+        self.spritename = spritename
         self.SpriteFrame = 0
         self.SpriteFramelimit = 0
         self._m_CurrentTime = 0.0
@@ -10,12 +10,15 @@ class Sprite:
         self._m_SpriteFrameTime = 0.015
         self._m_SpriteAccTime = 0.0
         self.bSprite = False
+        self.framelock = False
 
-    def SpriteTimer(self, Currenttime, Prevtime, spritename = 'effect'):
-        if spritename is 'keysprite':
+    def SpriteTimer(self, Currenttime, Prevtime):
+        if self.spritename is 'keysprite':
             self.SpriteFramelimit = 7
-        elif spritename is 'effect':
+            self._m_SpriteFrameTime = 0.025
+        elif self.spritename is 'effect':
             self.SpriteFramelimit = 25
+            self._m_SpriteFrameTime = 0.015
 
         if self.bSprite:
             self._m_CurrentTime = Currenttime

@@ -19,8 +19,10 @@ class Framework:
     #music
     _m_Music = None
     _m_runMusic = False
-    _m_SpriteTimer = None
     _m_CurrentScene = None
+
+    _m_KeySpriteTimer = None
+    _m_EffectSpriteTimer = None
 
     _m_musicname = None
 
@@ -86,10 +88,11 @@ class Framework:
     def switchscene(self, Scenename):
         self._m_CurrentScene = Scenename
         if self._m_CurrentScene == 'PlayScene':
-            self._m_SpriteTimer = list()
-            for idx in range(0, 4):
-                self._m_SpriteTimer.append(SpriteConf.Sprite())
-            self._m_CurrentScene = PlayScene.PlayScene(self._m_Music, self._m_SpriteTimer, self)
+            self._m_CurrentScene = PlayScene.PlayScene(self._m_Music, self)
+            self._m_KeySpriteTimer = self._m_CurrentScene._m_keysprite
+            self._m_EffectSpriteTimer = self._m_CurrentScene._m_effectsprite
+            #for idx in range(0, 4):
+            #    self._m_SpriteTimer.append(SpriteConf.Sprite())
         if self._m_CurrentScene == 'MenuScene':
             self._m_CurrentScene = MenuScene.MenuScene()
 
@@ -103,10 +106,14 @@ class Framework:
             if self._m_Music is not None:
                 self._m_Music._m_CurrentNote.NoteTimer(self._m_CurrentTime, self._m_PrevTime)
 
-            if self._m_SpriteTimer is not None:
-                for idx in range(0,4):
-                    if self._m_SpriteTimer[idx].bSprite:
-                        self._m_SpriteTimer[idx].SpriteTimer(self._m_CurrentTime, self._m_PrevTime)
+            for idx in range(0,4):
+                if self._m_KeySpriteTimer is not None:
+                    if self._m_KeySpriteTimer[idx].bSprite:
+                        self._m_KeySpriteTimer[idx].SpriteTimer(self._m_CurrentTime, self._m_PrevTime)
+
+                if self._m_EffectSpriteTimer is not None:
+                    if self._m_EffectSpriteTimer[idx].bSprite:
+                        self._m_EffectSpriteTimer[idx].SpriteTimer(self._m_CurrentTime, self._m_PrevTime)
 
             self._m_AccTime += self._m_CurrentTime - self._m_PrevTime
             self._m_PrevTime = self._m_CurrentTime

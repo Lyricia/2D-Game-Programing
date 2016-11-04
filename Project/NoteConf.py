@@ -65,7 +65,7 @@ class Note:
                     self._m_Notelist[keyidx][tmp] -= 1 * self._m_speed
                     self._m_ElapsedVal = ((self._m_ElapsedVal + 1) * self._m_speed) % (60 * self._m_speed)
                     #print(self._m_ElapsedVal)
-                if self._m_Notelist[keyidx][tmp] < 126:
+                if self._m_Notelist[keyidx][tmp] < 140 :
                     self._m_Notelist[keyidx][tmp] = 0
 
 
@@ -91,6 +91,9 @@ class Note:
                 self._m_accuracy = int(100 - abs(145 - self._m_Notelist[keynum][idx]) * 4)
                 self._m_score += self._m_accuracy * 10
                 self._m_Notelist[keynum][idx] = 0
+                return True
+
+
 
     def __del__(self):
         del self._m_Notelist
