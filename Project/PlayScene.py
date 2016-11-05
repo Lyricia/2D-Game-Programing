@@ -14,10 +14,8 @@ class PlayScene:
 
 
     def __init__(self, MusicData, pt_Framework):     # load music data
-        #self._m_Musicdata = Musicdata
         self._m_Musicdata = MusicData
         self._m_Notedata = MusicData._m_CurrentNote._m_Notelist
-        #self._m_sprite = Sprite
         self._m_keys = []
         self.call_fw = pt_Framework
 
@@ -101,7 +99,7 @@ class PlayScene:
             self._m_keysprite_image = load_image('Resources\\Image\\KeySprite.png')
             self._m_keysprite_image.opacify(0.1)
         if not self._m_scorefont:
-            self._m_scorefont = load_font('Resources\\Fonts\\Score.ttf',30)
+            self._m_scorefont = load_font('Resources\\Fonts\\Score.ttf',15)
 
 
     def sceneupdate(self):  # update play scene -> time update
@@ -118,18 +116,22 @@ class PlayScene:
         self._m_gear_image.draw(400, 380)
         self._m_scorefont.draw(30, 100, str(self._m_Musicdata._m_CurrentNote._m_score), (255, 255, 255))
         self._m_scorefont.draw(30, 150, str(self._m_Musicdata._m_CurrentNote._m_accuracy) + '%', (255, 255, 255))
+
+        draw_rectangle(200,0,450,142)
+
         self._m_scorefont.draw(30, 200, str(self._m_Musicdata._m_CurrentNote._m_CurrentNoteIdx),(255,255,255))
 
         for keyidx in range(4):
             if self._m_keysprite[keyidx].bSprite:
                 for frameidx in range(self._m_keysprite[keyidx].SpriteFrame):
                     self._m_keysprite_image.clip_draw(self._m_keysprite[keyidx].SpriteFrame * 66, 0, 66,  600,
-                                                    283 + (68  * keyidx), 455,
-                                                    66, 600)
+                                                    283 + (69  * keyidx), 455,
+                                                    69, 600)
 
             for idx in range(len(self._m_Notedata[keyidx])):
                 if self._m_Notedata[keyidx][idx] != '0':
                     if int(self._m_Notedata[keyidx][idx]) > 0 and int(self._m_Notedata[keyidx][idx]) < 760:
+                        self._m_scorefont.draw(200, int(self._m_Notedata[keyidx][idx]), str(self._m_Musicdata._m_CurrentNote._m_ElapsedVal),(255,255,255))
                         if keyidx % 2 == 0:
                             self._m_note1_image.draw(283 + 69 * keyidx, int(self._m_Notedata[keyidx][idx]))
                         elif keyidx % 2 == 1:

@@ -53,18 +53,16 @@ class Note:
         for keyidx in range(self._m_keynum):
             for idx in range(len(self._m_Notelist[0])):
                 if self._m_Notelist[keyidx][idx] != 0:
-                    self._m_Notelist[keyidx][idx] = (float)(145                                         \
-                                                    + (60 * idx * self._m_speed)                        \
-                                                    - (60 * self._m_CurrentNoteIdx * self._m_speed)     \
-                                                    + self._m_ElapsedVal)
+                    self._m_Notelist[keyidx][idx] = \
+                        (float)(142 + ((idx -self._m_CurrentNoteIdx) * 60 * self._m_speed) + self._m_ElapsedVal)
 
     def UpdateNote(self):
+        self._m_ElapsedVal = ((self._m_ElapsedVal + 1) % 60) * self._m_speed
+        print(self._m_ElapsedVal)
         for keyidx in range(self._m_keynum):
             for tmp in range(len(self._m_Notelist[0])):
                 if self._m_Notelist[keyidx][tmp] > 10 - 1 * self._m_speed and self._m_Notelist[keyidx][tmp] != 0:
                     self._m_Notelist[keyidx][tmp] -= 1 * self._m_speed
-                    self._m_ElapsedVal = ((self._m_ElapsedVal + 1) * self._m_speed) % (60 * self._m_speed)
-                    #print(self._m_ElapsedVal)
                 if self._m_Notelist[keyidx][tmp] < 140 :
                     self._m_Notelist[keyidx][tmp] = 0
 
@@ -74,7 +72,7 @@ class Note:
         self._m_idxacctime += currenttime - prevtime
         self._m_posacctime += currenttime - prevtime
 
-        if ((self._m_idxacctime > 60.0 / float(self._m_SongBPM)) and self._m_Notelist[0][0] < 145):      #timer to count Current Beat Note Index
+        if ((self._m_idxacctime > 60.0 / float(self._m_SongBPM))):      #timer to count Current Beat Note Index
             self._m_CurrentNoteIdx += 1
             self._m_idxacctime -= 60.0 / float(self._m_SongBPM)
 
