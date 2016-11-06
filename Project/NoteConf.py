@@ -58,7 +58,6 @@ class Note:
 
     def UpdateNote(self):
         self._m_ElapsedVal = ((self._m_ElapsedVal + 1) % 60) * self._m_speed
-        print(self._m_ElapsedVal)
         for keyidx in range(self._m_keynum):
             for tmp in range(len(self._m_Notelist[0])):
                 if self._m_Notelist[keyidx][tmp] > 10 - 1 * self._m_speed and self._m_Notelist[keyidx][tmp] != 0:
@@ -76,9 +75,9 @@ class Note:
             self._m_CurrentNoteIdx += 1
             self._m_idxacctime -= 60.0 / float(self._m_SongBPM)
 
-        if self._m_posacctime > 1 / float(self._m_SongBPM):         #Timer Move note 1 pixel per 1/BPM sec
+        if self._m_posacctime > 1 / (float(self._m_SongBPM)*2):         #Timer Move note 1 pixel per 1/BPM sec
             self.UpdateNote()
-            self._m_posacctime -= 1 / float(self._m_SongBPM)
+            self._m_posacctime -= 1 / (float(self._m_SongBPM)*2)
 
 
 

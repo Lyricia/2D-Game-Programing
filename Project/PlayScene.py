@@ -131,7 +131,7 @@ class PlayScene:
             for idx in range(len(self._m_Notedata[keyidx])):
                 if self._m_Notedata[keyidx][idx] != '0':
                     if int(self._m_Notedata[keyidx][idx]) > 0 and int(self._m_Notedata[keyidx][idx]) < 760:
-                        self._m_scorefont.draw(200, int(self._m_Notedata[keyidx][idx]), str(self._m_Musicdata._m_CurrentNote._m_ElapsedVal),(255,255,255))
+                        self._m_scorefont.draw(200, int(self._m_Notedata[keyidx][idx]), str(idx),(255,255,255))
                         if keyidx % 2 == 0:
                             self._m_note1_image.draw(283 + 69 * keyidx, int(self._m_Notedata[keyidx][idx]))
                         elif keyidx % 2 == 1:
