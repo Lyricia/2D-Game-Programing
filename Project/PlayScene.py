@@ -33,21 +33,25 @@ class PlayScene:
         if self._m_keys[SDL_SCANCODE_E] :
             if self._m_Musicdata._m_CurrentNote.notejudgechk(0):
                 self._m_effectsprite[0].bSprite = True
+                self._m_effectsprite[0].SpriteFrame = 0
             self._m_keysprite[0].bSprite = True
             self._m_keysprite[0].framelock = True
         if self._m_keys[SDL_SCANCODE_R] :
             if self._m_Musicdata._m_CurrentNote.notejudgechk(1):
                 self._m_effectsprite[1].bSprite = True
+                self._m_effectsprite[1].SpriteFrame = 0
             self._m_keysprite[1].bSprite = True
             self._m_keysprite[1].framelock = True
         if self._m_keys[SDL_SCANCODE_U] :
             if self._m_Musicdata._m_CurrentNote.notejudgechk(2):
                 self._m_effectsprite[2].bSprite = True
+                self._m_effectsprite[2].SpriteFrame = 0
             self._m_keysprite[2].bSprite = True
             self._m_keysprite[2].framelock = True
         if self._m_keys[SDL_SCANCODE_I] :
             if self._m_Musicdata._m_CurrentNote.notejudgechk(3):
                 self._m_effectsprite[3].bSprite = True
+                self._m_effectsprite[3].SpriteFrame = 0
             self._m_keysprite[3].bSprite = True
             self._m_keysprite[3].framelock = True
 
