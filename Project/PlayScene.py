@@ -109,9 +109,12 @@ class PlayScene:
     def sceneupdate(self):  # update play scene -> time update
         #print('scene update func')
         self.handle_event()
+
+
         for keyidx in range(self._m_Musicdata._m_CurrentNote._m_keynum):
-            if self._m_keysprite[keyidx].framelock and self._m_keysprite[keyidx].SpriteFrame is 5:
-                self._m_keysprite[keyidx].SpriteFrame -= 1
+            if self._m_keysprite[keyidx] is not None:
+                if self._m_keysprite[keyidx].framelock and self._m_keysprite[keyidx].SpriteFrame is 5:
+                    self._m_keysprite[keyidx].SpriteFrame -= 1
         self.scenedraw()
 
 
@@ -121,9 +124,9 @@ class PlayScene:
         self._m_scorefont.draw(30, 100, str(self._m_Musicdata._m_CurrentNote._m_score), (255, 255, 255))
         self._m_scorefont.draw(30, 150, str(self._m_Musicdata._m_CurrentNote._m_accuracy) + '%', (255, 255, 255))
 
-        draw_rectangle(200,0,450,142)
+        #draw_rectangle(200,0,450,142)
 
-        self._m_scorefont.draw(30, 200, str(self._m_Musicdata._m_CurrentNote._m_CurrentNoteIdx),(255,255,255))
+        #self._m_scorefont.draw(30, 200, str(self._m_Musicdata._m_CurrentNote._m_CurrentNoteIdx),(255,255,255))
 
         for keyidx in range(4):
             if self._m_keysprite[keyidx].bSprite:
@@ -135,7 +138,7 @@ class PlayScene:
             for idx in range(len(self._m_Notedata[keyidx])):
                 if self._m_Notedata[keyidx][idx] != '0':
                     if int(self._m_Notedata[keyidx][idx]) > 0 and int(self._m_Notedata[keyidx][idx]) < 760:
-                        self._m_scorefont.draw(200, int(self._m_Notedata[keyidx][idx]), str(idx),(255,255,255))
+                        #self._m_scorefont.draw(200, int(self._m_Notedata[keyidx][idx]), str(idx),(255,255,255))
                         if keyidx % 2 == 0:
                             self._m_note1_image.draw(283 + 69 * keyidx, int(self._m_Notedata[keyidx][idx]))
                         elif keyidx % 2 == 1:
