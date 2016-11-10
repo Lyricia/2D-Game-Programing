@@ -31,23 +31,23 @@ class Framework:
 
         self.bKeyDown = False
 
-        if self.keys[SDL_SCANCODE_S]:
-            if self._m_runMusic == False:
-                self._m_runMusic = True
-                self._m_musicname = '120BPM'
-                self._m_CurrentScene = 'PlayScene'
-
-        if self.keys[SDL_SCANCODE_D]:
-            if self._m_runMusic == False:
-                self._m_runMusic = True
-                self._m_musicname = 'Evans'
-                self._m_CurrentScene = 'PlayScene'
-
-        if self.keys[SDL_SCANCODE_A]:
-            if self._m_runMusic == False:
-                self._m_runMusic = True
-                self._m_musicname = '180BPM'
-                self._m_CurrentScene = 'PlayScene'
+        #if self.keys[SDL_SCANCODE_S]:
+        #    if self._m_runMusic == False:
+        #        self._m_runMusic = True
+        #        self._m_musicname = '120BPM'
+        #        self._m_CurrentScene = 'PlayScene'
+#
+        #if self.keys[SDL_SCANCODE_D]:
+        #    if self._m_runMusic == False:
+        #        self._m_runMusic = True
+        #        self._m_musicname = 'Evans'
+        #        self._m_CurrentScene = 'PlayScene'
+#
+        #if self.keys[SDL_SCANCODE_A]:
+        #    if self._m_runMusic == False:
+        #        self._m_runMusic = True
+        #        self._m_musicname = '180BPM'
+        #        self._m_CurrentScene = 'PlayScene'
 
 
         events = get_events()
@@ -63,23 +63,24 @@ class Framework:
     def _create(self):
         open_canvas(800,760)
         self._m_CurrentScene = 'MenuScene'
+        self.switchscene(self._m_CurrentScene)
 
     def _update(self):
         self.handle_event()
-        if self._m_runMusic == True:
-            if self._m_Music == None:
-                self._m_Music = MusicConf.Music(self._m_musicname)
-            if self._m_Music.MusicFinished():
-                print("end")
-                self._m_Music.MusicStop()
-                del (self._m_Music)
-                self._m_runMusic = False
-                self._m_CurrentScene = 'MenuScene'
+        #if self._m_runMusic == True:
+        #    if self._m_Mus#ic == None:
+        #        self._m_Music = MusicConf.Music(self._m_musicname)
+        #    if self._m_Music.MusicFinished():
+        #        print("end")
+        #        self._m_Music.MusicStop()
+        #        del (self._m_Music)
+        #        self._m_runMusic = False
+        #        self._m_CurrentScene = 'MenuScene'
 
     def _draw(self):
         clear_canvas()
         if self._m_CurrentScene is not None:
-            self.switchscene(self._m_CurrentScene)
+            #self.switchscene(self._m_CurrentScene)
             self._m_CurrentScene.sceneupdate()
         else:
             pass
@@ -88,13 +89,13 @@ class Framework:
     def switchscene(self, Scenename):
         self._m_CurrentScene = Scenename
         if self._m_CurrentScene == 'PlayScene':
-            self._m_CurrentScene = PlayScene.PlayScene(self._m_Music, self)
+            self._m_CurrentScene = PlayScene.PlayScene(self, self._m_musicname)
             self._m_KeySpriteTimer = self._m_CurrentScene._m_keysprite
             self._m_EffectSpriteTimer = self._m_CurrentScene._m_effectsprite
             #for idx in range(0, 4):
             #    self._m_SpriteTimer.append(SpriteConf.Sprite())
         if self._m_CurrentScene == 'MenuScene':
-            self._m_CurrentScene = MenuScene.MenuScene()
+            self._m_CurrentScene = MenuScene.MenuScene(self)
 
 
     def run(self):
@@ -117,6 +118,7 @@ class Framework:
 
             self._m_AccTime += self._m_CurrentTime - self._m_PrevTime
             self._m_PrevTime = self._m_CurrentTime
+
             if self._m_AccTime > self._m_FPS_MAX:       # draw when time over fps
                 self._update()
                 self._draw()

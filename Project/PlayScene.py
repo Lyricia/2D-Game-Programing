@@ -13,9 +13,9 @@ class PlayScene:
     _m_scorefont = None
 
 
-    def __init__(self, MusicData, pt_Framework):     # load music data
-        self._m_Musicdata = MusicData
-        self._m_Notedata = MusicData._m_CurrentNote._m_Notelist
+    def __init__(self, pt_Framework, Musictitle):     # load music data
+        self._m_Musicdata = MusicConf.Music(Musictitle)
+        self._m_Notedata = self._m_Musicdata._m_CurrentNote._m_Notelist
         self._m_keys = []
         self.call_fw = pt_Framework
 
@@ -82,8 +82,8 @@ class PlayScene:
             self._m_Musicdata._m_CurrentNote._NotePosition()
 
         if self._m_keys[SDL_SCANCODE_M]:
-            self.call_fw._m_Music.MusicStop()
-            del(self.call_fw._m_Music)
+            self._m_Musicdata.MusicStop()
+            del(self._m_Musicdata)
             self.call_fw._m_runMusic = False
             self.call_fw.switchscene('MenuScene')
 
@@ -109,11 +109,15 @@ class PlayScene:
     def sceneupdate(self):  # update play scene -> time update
         #print('scene update func')
         self.handle_event()
-        for keyidx in range(self._m_Musicdata._m_CurrentNote._m_keynum):
-            if self._m_keysprite[keyidx].framelock and self._m_keysprite[keyidx].SpriteFrame is 5:
-                self._m_keysprite[keyidx].SpriteFrame -= 1
-        self.scenedraw()
+        if self._m_Musicdata is not None:
+            for keyidx in range(self._m_Musicdata._m_CurrentNote._m_keynum):
+                if self._m_keysprite[keyidx].framelock and self._m_keysprite[keyidx].SpriteFrame is 5:
+                    self._m_keysprite[keyidx].SpriteFrame -= 1
+        #self.scenedraw()
 
+    def spriteupdate(self):
+
+        pass
 
     def scenedraw(self):
         self._m_background_image.draw(400, 380)
