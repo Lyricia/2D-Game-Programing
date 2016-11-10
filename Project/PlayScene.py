@@ -84,6 +84,7 @@ class PlayScene:
         if self._m_keys[SDL_SCANCODE_M]:
             self._m_Musicdata.MusicStop()
             del(self._m_Musicdata)
+            self._m_Musicdata = None
             self.call_fw._m_runMusic = False
             self.call_fw.switchscene('MenuScene')
 
@@ -107,13 +108,13 @@ class PlayScene:
 
 
     def sceneupdate(self):  # update play scene -> time update
-        #print('scene update func')
         self.handle_event()
+
         if self._m_Musicdata is not None:
             for keyidx in range(self._m_Musicdata._m_CurrentNote._m_keynum):
                 if self._m_keysprite[keyidx].framelock and self._m_keysprite[keyidx].SpriteFrame is 5:
                     self._m_keysprite[keyidx].SpriteFrame -= 1
-        #self.scenedraw()
+            self.scenedraw()
 
     def spriteupdate(self):
 

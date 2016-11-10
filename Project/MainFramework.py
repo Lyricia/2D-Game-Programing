@@ -27,29 +27,6 @@ class Framework:
     _m_musicname = None
 
     def handle_event(self):
-        self.keys = SDL_GetKeyboardState(None)
-
-        self.bKeyDown = False
-
-        #if self.keys[SDL_SCANCODE_S]:
-        #    if self._m_runMusic == False:
-        #        self._m_runMusic = True
-        #        self._m_musicname = '120BPM'
-        #        self._m_CurrentScene = 'PlayScene'
-#
-        #if self.keys[SDL_SCANCODE_D]:
-        #    if self._m_runMusic == False:
-        #        self._m_runMusic = True
-        #        self._m_musicname = 'Evans'
-        #        self._m_CurrentScene = 'PlayScene'
-#
-        #if self.keys[SDL_SCANCODE_A]:
-        #    if self._m_runMusic == False:
-        #        self._m_runMusic = True
-        #        self._m_musicname = '180BPM'
-        #        self._m_CurrentScene = 'PlayScene'
-
-
         events = get_events()
         for event in events:
             if event.type == SDL_QUIT:
@@ -67,9 +44,6 @@ class Framework:
 
     def _update(self):
         self.handle_event()
-        #if self._m_runMusic == True:
-        #    if self._m_Mus#ic == None:
-        #        self._m_Music = MusicConf.Music(self._m_musicname)
         #    if self._m_Music.MusicFinished():
         #        print("end")
         #        self._m_Music.MusicStop()
