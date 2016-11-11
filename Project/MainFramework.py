@@ -51,6 +51,9 @@ class Framework:
         #        self._m_runMusic = False
         #        self._m_CurrentScene = 'MenuScene'
 
+        if self._m_CurrentScene is not None:
+            self._m_CurrentScene.sceneupdate()
+
     def _draw(self):
         clear_canvas()
         if self._m_CurrentScene is not None:
@@ -78,25 +81,25 @@ class Framework:
         self._m_PrevTime = time.time()
         while self._m_State:
             self._m_CurrentTime = time.time()
-            if self._m_Music is not None:
-                self._m_Music._m_CurrentNote.NoteTimer(self._m_CurrentTime, self._m_PrevTime)
+            #if self._m_Music is not None:
+            #    self._m_Music._m_CurrentNote.NoteTimer(self._m_CurrentTime, self._m_PrevTime)
+#
+            #for idx in range(0,4):
+            #    if self._m_KeySpriteTimer is not None:
+            #        if self._m_KeySpriteTimer[idx].bSprite:
+            #            self._m_KeySpriteTimer[idx].SpriteTimer(self._m_CurrentTime, self._m_PrevTime)
+#
+            #    if self._m_EffectSpriteTimer is not None:
+            #        if self._m_EffectSpriteTimer[idx].bSprite:
+            #            self._m_EffectSpriteTimer[idx].SpriteTimer(self._m_CurrentTime, self._m_PrevTime)
 
-            for idx in range(0,4):
-                if self._m_KeySpriteTimer is not None:
-                    if self._m_KeySpriteTimer[idx].bSprite:
-                        self._m_KeySpriteTimer[idx].SpriteTimer(self._m_CurrentTime, self._m_PrevTime)
+            self._m_AccTime = self._m_CurrentTime - self._m_PrevTime
 
-                if self._m_EffectSpriteTimer is not None:
-                    if self._m_EffectSpriteTimer[idx].bSprite:
-                        self._m_EffectSpriteTimer[idx].SpriteTimer(self._m_CurrentTime, self._m_PrevTime)
-
-            self._m_AccTime += self._m_CurrentTime - self._m_PrevTime
+            #if self._m_AccTime > self._m_FPS_MAX:       # draw when time over fps
+            self._update()
             self._m_PrevTime = self._m_CurrentTime
-
-            if self._m_AccTime > self._m_FPS_MAX:       # draw when time over fps
-                self._update()
-                self._draw()
-                self._m_AccTime -= self._m_FPS_MAX
+            self._draw()
+            self._m_AccTime -= self._m_FPS_MAX
 
         self._exit()
 

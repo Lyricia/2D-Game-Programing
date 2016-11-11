@@ -108,9 +108,12 @@ class PlayScene:
 
 
     def sceneupdate(self):  # update play scene -> time update
+
         self.handle_event()
 
         if self._m_Musicdata is not None:
+            self._m_Musicdata._m_CurrentNote.NoteTimer(self.call_fw._m_CurrentTime, self.call_fw._m_PrevTime)
+
             for keyidx in range(self._m_Musicdata._m_CurrentNote._m_keynum):
                 if self._m_keysprite[keyidx].framelock and self._m_keysprite[keyidx].SpriteFrame is 5:
                     self._m_keysprite[keyidx].SpriteFrame -= 1
