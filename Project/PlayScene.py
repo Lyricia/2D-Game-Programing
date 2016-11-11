@@ -25,6 +25,10 @@ class PlayScene:
             self._m_keysprite.append(SpriteConf.Sprite('keysprite'))
             self._m_effectsprite.append(SpriteConf.Sprite('effect'))
 
+        self.call_fw._m_NoteTimer = self._m_Musicdata._m_CurrentNote.NoteTimer
+        self.call_fw._m_KeySpriteTimer = self._m_keysprite
+        self.call_fw._m_EffectSpriteTimer = self._m_effectsprite
+
         self.image_load()
 
     def handle_event(self):
@@ -112,11 +116,10 @@ class PlayScene:
         self.handle_event()
 
         if self._m_Musicdata is not None:
-            self._m_Musicdata._m_CurrentNote.NoteTimer(self.call_fw._m_CurrentTime, self.call_fw._m_PrevTime)
-
             for keyidx in range(self._m_Musicdata._m_CurrentNote._m_keynum):
                 if self._m_keysprite[keyidx].framelock and self._m_keysprite[keyidx].SpriteFrame is 5:
                     self._m_keysprite[keyidx].SpriteFrame -= 1
+
             self.scenedraw()
 
     def spriteupdate(self):
