@@ -40,7 +40,7 @@ class Framework:
                     self._m_State = False
 
     def _create(self):
-        open_canvas(800,760)
+        open_canvas(800, 760)
         self._m_CurrentScene = 'MenuScene'
         self.switchscene(self._m_CurrentScene)
 

@@ -127,11 +127,6 @@ class PlayScene:
                 self.call_fw._m_runMusic = False
                 self.call_fw.switchscene('MenuScene')
 
-
-    def spriteupdate(self):
-
-        pass
-
     def scenedraw(self):
         self._m_background_image.draw(400, 380)
         self._m_gear_image.draw(400, 380)
@@ -140,7 +135,7 @@ class PlayScene:
 
         draw_rectangle(200,0,450,142)
 
-        self._m_scorefont.draw(30, 200, str(self._m_Musicdata._m_CurrentNote._m_CurrentNoteIdx),(255,255,255))
+        #self._m_scorefont.draw(30, 200, str(self._m_Musicdata._m_CurrentNote._m_CurrentNoteIdx),(255,255,255))
 
         for keyidx in range(4):
             if self._m_keysprite[keyidx].bSprite:
@@ -162,7 +157,6 @@ class PlayScene:
                 for frameidx in range(self._m_effectsprite[keyidx].SpriteFrame):
                     self._m_effectsprite_image.clip_draw(self._m_effectsprite[keyidx].SpriteFrame * 192, 0, 192, 192,
                                                          283 + (69 * keyidx), 155, 120, 120)
-
 
     def spritereturn(self):
         return self._m_keysprite
