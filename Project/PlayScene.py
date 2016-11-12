@@ -120,7 +120,13 @@ class PlayScene:
                 if self._m_keysprite[keyidx].framelock and self._m_keysprite[keyidx].SpriteFrame is 5:
                     self._m_keysprite[keyidx].SpriteFrame -= 1
 
-            self.scenedraw()
+            if self._m_Musicdata.MusicFinished():
+                self._m_Musicdata.MusicStop()
+                del (self._m_Musicdata)
+                self._m_Musicdata = None
+                self.call_fw._m_runMusic = False
+                self.call_fw.switchscene('MenuScene')
+
 
     def spriteupdate(self):
 

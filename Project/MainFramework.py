@@ -46,24 +46,14 @@ class Framework:
 
     def _update(self):
         self.handle_event()
-        #    if self._m_Music.MusicFinished():
-        #        print("end")
-        #        self._m_Music.MusicStop()
-        #        del (self._m_Music)
-        #        self._m_runMusic = False
-        #        self._m_CurrentScene = 'MenuScene'
-
         if self._m_CurrentScene is not None:
             self._m_CurrentScene.sceneupdate()
+            pass
 
     def _draw(self):
         clear_canvas()
         if self._m_CurrentScene is not None:
-            #self.switchscene(self._m_CurrentScene)
-            self._m_CurrentScene.sceneupdate()
-            pass
-        else:
-            pass
+            self._m_CurrentScene.scenedraw()
         update_canvas()
 
     def switchscene(self, Scenename):

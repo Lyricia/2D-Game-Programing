@@ -35,7 +35,8 @@ class MenuScene:
 
         #print('menu update func')
         self.handle_event()
-        self._m_background.draw(400, 380)
-        self._m_menu.draw(400,380)
-
         pass
+
+    def scenedraw(self):
+        self._m_background.draw(400, 380)
+        self._m_menu.draw(400, 380)
