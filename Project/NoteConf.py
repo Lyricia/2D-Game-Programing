@@ -67,25 +67,18 @@ class Note:
                     self._m_Notelist[keyidx][tmp] = 0
                     self._m_combo = 0
 
-
-
-
     def NoteTimer(self, currenttime, prevtime):
         self._m_idxacctime += currenttime - prevtime
         self._m_posacctime += currenttime - prevtime
 
-        if self._m_idxacctime > 60.0 / (float(self._m_SongBPM)*2):      #timer to count Current Beat Note Index
+        if self._m_idxacctime > 60.0 / (float(self._m_SongBPM) * 2):      #timer to count Current Beat Note Index
             self._m_CurrentNoteIdx += 1
-            self._m_idxacctime -= 60.0 / (float(self._m_SongBPM)*2)
+            self._m_idxacctime -= 60.0 / (float(self._m_SongBPM) * 2)
 
-        if self._m_posacctime > 1 / (float(self._m_SongBPM)*2):         #Timer Move note 1 pixel per 1/BPM sec
+        if self._m_posacctime > 1 / (float(self._m_SongBPM) * 2):         #Timer Move note 1 pixel per 1/BPM sec
             self.UpdateNote()
             self._m_posacctime -= 1 / (float(self._m_SongBPM)*2)
-            print(self._m_posacctime)
-
-
-
-
+            self._m_posacctime -= 1 / (float(self._m_SongBPM) * 2)
 
     def notejudgechk(self,keynum):
         for idx in range(len(self._m_Notelist[0])):
@@ -95,8 +88,6 @@ class Note:
                 self._m_Notelist[keynum][idx] = 0
                 self._m_combo +=1
                 return True
-
-
 
     def __del__(self):
         del self._m_Notelist
