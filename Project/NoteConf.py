@@ -71,14 +71,13 @@ class Note:
         self._m_idxacctime += currenttime - prevtime
         self._m_posacctime += currenttime - prevtime
 
-        if self._m_idxacctime > 60.0 / (float(self._m_SongBPM)*2):      #timer to count Current Beat Note Index
+        if self._m_idxacctime > 60.0 / (float(self._m_SongBPM) * 2):      #timer to count Current Beat Note Index
             self._m_CurrentNoteIdx += 1
-            self._m_idxacctime -= 60.0 / (float(self._m_SongBPM)*2)
+            self._m_idxacctime -= 60.0 / (float(self._m_SongBPM) * 2)
 
-        if self._m_posacctime > 1 / (float(self._m_SongBPM)*2):         #Timer Move note 1 pixel per 1/BPM sec
+        if self._m_posacctime > 1 / (float(self._m_SongBPM) * 2):         #Timer Move note 1 pixel per 1/BPM sec
             self.UpdateNote()
-            self._m_posacctime -= 1 / (float(self._m_SongBPM)*2)
-
+            self._m_posacctime -= 1 / (float(self._m_SongBPM) * 2)
 
 
 
