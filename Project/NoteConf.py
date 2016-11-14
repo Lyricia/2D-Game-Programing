@@ -14,6 +14,7 @@ class Note:
     _m_CurrentNoteIdx = 0
     _m_calljudgeSpriteTimer = None
     _m_score = 0
+    _m_combo = 0
 
     notechk = 0
 
@@ -59,11 +60,13 @@ class Note:
     def UpdateNote(self):
         self._m_ElapsedVal = ((self._m_ElapsedVal + 1) % 60) * self._m_speed
         for keyidx in range(self._m_keynum):
-            for tmp in range(len(self._m_Notelist[0])):
+            for tmp in range(self._m_CurrentNoteIdx, len(self._m_Notelist[0])):
                 if self._m_Notelist[keyidx][tmp] > 10 - 1 * self._m_speed and self._m_Notelist[keyidx][tmp] != 0:
                     self._m_Notelist[keyidx][tmp] -= 1 * self._m_speed
-                if self._m_Notelist[keyidx][tmp] < 140 :
+                if 120 < self._m_Notelist[keyidx][tmp] < 140:
                     self._m_Notelist[keyidx][tmp] = 0
+                    self._m_combo = 0
+
 
 
 
@@ -78,6 +81,7 @@ class Note:
         if self._m_posacctime > 1 / (float(self._m_SongBPM)*2):         #Timer Move note 1 pixel per 1/BPM sec
             self.UpdateNote()
             self._m_posacctime -= 1 / (float(self._m_SongBPM)*2)
+            print(self._m_posacctime)
 
 
 
@@ -85,10 +89,11 @@ class Note:
 
     def notejudgechk(self,keynum):
         for idx in range(len(self._m_Notelist[0])):
-            if 150 - 25 < self._m_Notelist[keynum][idx] < 150 + 25:
+            if 150 - 20 < self._m_Notelist[keynum][idx] < 150 + 20:
                 self._m_accuracy = int(100 - abs(150 - self._m_Notelist[keynum][idx]) * 4)
                 self._m_score += self._m_accuracy * 10
                 self._m_Notelist[keynum][idx] = 0
+                self._m_combo +=1
                 return True
 
 
