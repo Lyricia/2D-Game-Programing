@@ -1,9 +1,10 @@
 from lylib import *
 
-import MusicConf
 import PlayScene
 import MenuScene
-import SpriteConf
+import GameOverScene
+import ResultScene
+import PlayerConf
 
 class Framework:
 
@@ -21,12 +22,15 @@ class Framework:
     _m_runMusic = False
     _m_CurrentScene = None
 
-    _m_NoteTimer = None
+    _m_NoteData = None
 
     _m_KeySpriteTimer = None
     _m_EffectSpriteTimer = None
+    _m_isPaused = False
 
     _m_musicname = None
+
+    _m_player = None
 
     def handle_event(self):
         events = get_events()
@@ -42,6 +46,7 @@ class Framework:
     def _create(self):
         open_canvas(800, 760)
         self._m_CurrentScene = 'MenuScene'
+        self._m_player = PlayerConf.player()
         self.switchscene(self._m_CurrentScene)
 
     def _update(self):
@@ -62,6 +67,10 @@ class Framework:
             self._m_CurrentScene = PlayScene.PlayScene(self, self._m_musicname)
         if self._m_CurrentScene == 'MenuScene':
             self._m_CurrentScene = MenuScene.MenuScene(self)
+        if self._m_CurrentScene == 'GameOverScene':
+            self._m_CurrentScene = GameOverScene.GameOverScene(self)
+        if self._m_CurrentScene == 'ResultScene':
+            self._m_CurrentScene = ResultScene.ResultScene(self)
 
 
     def run(self):
@@ -72,15 +81,17 @@ class Framework:
             self._m_CurrentTime = time.time()
             self._m_AccTime += self._m_CurrentTime - self._m_PrevTime
 
-            if self._m_NoteTimer is not None:
-                self._m_NoteTimer(self._m_CurrentTime, self._m_PrevTime)
-            #for idx in range(0,4):
-            #    if self._m_KeySpriteTimer is not None:
-            #        if self._m_KeySpriteTimer[idx].bSprite:
-            #            self._m_KeySpriteTimer[idx].SpriteTimer(self._m_CurrentTime, self._m_PrevTime)
-            #    if self._m_EffectSpriteTimer is not None:
-            #        if self._m_EffectSpriteTimer[idx].bSprite:
-            #            self._m_EffectSpriteTimer[idx].SpriteTimer(self._m_CurrentTime, self._m_PrevTime)
+            if self._m_NoteData is not None:
+                if self._m_isPaused is False:
+                    self._m_NoteData.NoteTimer(self._m_CurrentTime, self._m_PrevTime)
+
+            for idx in range(0,4):
+                if self._m_KeySpriteTimer is not None:
+                    if self._m_KeySpriteTimer[idx].bSprite:
+                        self._m_KeySpriteTimer[idx].SpriteTimer(self._m_CurrentTime, self._m_PrevTime)
+                if self._m_EffectSpriteTimer is not None:
+                    if self._m_EffectSpriteTimer[idx].bSprite:
+                        self._m_EffectSpriteTimer[idx].SpriteTimer(self._m_CurrentTime, self._m_PrevTime)
 
             self._m_PrevTime = self._m_CurrentTime
 

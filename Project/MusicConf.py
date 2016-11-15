@@ -27,7 +27,7 @@ class Music:
                     self._m_CurrentSongBPM = line[3]
                     self._m_SongDuration = line[4]
                     self._m_StartTime = time.time()
-                    self._m_PlayEndTime = self._m_StartTime  + float(self._m_SongDuration) + float(2)
+                    self._m_PlayEndTime = self._m_StartTime  + float(self._m_SongDuration) + float(0.5)
                     break
 
             self._loadsong()
@@ -43,7 +43,11 @@ class Music:
         self._m_PlayingSong.set_volume(80)
         self._m_PlayingSong.play()
 
+    def MusicPause(self):
+        self._m_PlayingSong.pause()
 
+    def MusicResume(self):
+        self._m_PlayingSong.resume()
 
     def MusicStop(self):
         self._m_PlayingSong.stop()

@@ -10,8 +10,8 @@ class PlayScene:
     _m_note2_image = None
     _m_effectsprite_image = None
     _m_keysprite_image = None
+    _m_healthbar = None
     _m_scorefont = None
-    _m_isPause = False
 
 
     def __init__(self, pt_Framework, Musictitle):     # load music data
@@ -26,7 +26,7 @@ class PlayScene:
             self._m_keysprite.append(SpriteConf.Sprite('keysprite'))
             self._m_effectsprite.append(SpriteConf.Sprite('effect'))
 
-        self.call_fw._m_NoteTimer = self._m_Musicdata._m_CurrentNote.NoteTimer
+        self.call_fw._m_NoteData = self._m_Musicdata._m_CurrentNote
         self.call_fw._m_KeySpriteTimer = self._m_keysprite
         self.call_fw._m_EffectSpriteTimer = self._m_effectsprite
 
@@ -87,7 +87,13 @@ class PlayScene:
             self._m_Musicdata._m_CurrentNote._NotePosition()
 
         if self._m_keys[SDL_SCANCODE_P]:
-            self._m_isPause = True
+            if self.call_fw._m_isPaused is False:
+                self.call_fw._m_isPaused = True
+                self._m_Musicdata.MusicPause()
+
+            elif self.call_fw._m_isPaused is True:
+                self.call_fw._m_isPaused  = False
+                self._m_Musicdata.MusicResume()
 
         if self._m_keys[SDL_SCANCODE_M]:
             self._m_Musicdata.MusicStop()
@@ -105,6 +111,8 @@ class PlayScene:
             self._m_note1_image = load_image('Resources\\Image\\note p1.png')
         if not self._m_note2_image:
             self._m_note2_image = load_image('Resources\\Image\\note p2.png')
+        if not self._m_healthbar:
+            self._m_healthbar = load_image('Resources\\Image\\healthbar.png')
         if not self._m_effectsprite_image:
             self._m_effectsprite_image = load_image('Resources\\Image\\effect.png')
             self._m_effectsprite_image.opacify(0.1)
@@ -112,7 +120,7 @@ class PlayScene:
             self._m_keysprite_image = load_image('Resources\\Image\\KeySprite.png')
             self._m_keysprite_image.opacify(0.1)
         if not self._m_scorefont:
-            self._m_scorefont = load_font('Resources\\Fonts\\Score.ttf',15)
+            self._m_scorefont = load_font('Resources\\Fonts\\Score.ttf',20)
 
 
     def sceneupdate(self):  # update play scene -> time update
@@ -124,22 +132,39 @@ class PlayScene:
                 if self._m_keysprite[keyidx].framelock and self._m_keysprite[keyidx].SpriteFrame is 5:
                     self._m_keysprite[keyidx].SpriteFrame -= 1
 
-            if self._m_Musicdata.MusicFinished():
+            if self._m_Musicdata._m_CurrentNote._m_deathcount > 10:
+                self.call_fw._m_player.setStat(self._m_Musicdata._m_CurrentNote._m_score,
+                                               (self._m_Musicdata._m_CurrentNote._m_averageaccuracy /
+                                                self._m_Musicdata._m_CurrentNote._m_notecount))
                 self._m_Musicdata.MusicStop()
-                del (self._m_Musicdata)
                 self._m_Musicdata = None
                 self.call_fw._m_runMusic = False
-                self.call_fw.switchscene('MenuScene')
+                self.call_fw.switchscene('GameOverScene')
+                del (self._m_Musicdata)
+                return
+
+            if self._m_Musicdata.MusicFinished():
+                self.call_fw._m_player.setStat(self._m_Musicdata._m_CurrentNote._m_score,
+                                               (self._m_Musicdata._m_CurrentNote._m_averageaccuracy /
+                                                self._m_Musicdata._m_CurrentNote._m_notecount))
+                self._m_Musicdata.MusicStop()
+                self._m_Musicdata = None
+                self.call_fw._m_runMusic = False
+                self.call_fw.switchscene('ResultScene')
+                del (self._m_Musicdata)
+                return
+
+
 
     def scenedraw(self):
         self._m_background_image.draw(400, 380)
         self._m_gear_image.draw(400, 380)
+        self._m_healthbar.draw(536, 210 -(10*self._m_Musicdata._m_CurrentNote._m_deathcount),
+                               10, 235 -(23*self._m_Musicdata._m_CurrentNote._m_deathcount))
+
         self._m_scorefont.draw(30, 100, str(self._m_Musicdata._m_CurrentNote._m_score), (255, 255, 255))
         self._m_scorefont.draw(30, 150, str(self._m_Musicdata._m_CurrentNote._m_accuracy) + '%', (255, 255, 255))
-
-        draw_rectangle(200,0,450,142)
-
-        #self._m_scorefont.draw(30, 200, str(self._m_Musicdata._m_CurrentNote._m_CurrentNoteIdx),(255,255,255))
+        self._m_scorefont.draw(30, 200, str(self._m_Musicdata._m_CurrentNote._m_combo), (255, 255, 255))
 
         for keyidx in range(4):
             if self._m_keysprite[keyidx].bSprite:
@@ -151,7 +176,7 @@ class PlayScene:
             for idx in range(len(self._m_Notedata[keyidx])):
                 if self._m_Notedata[keyidx][idx] != '0':
                     if int(self._m_Notedata[keyidx][idx]) > 0 and int(self._m_Notedata[keyidx][idx]) < 760:
-                        self._m_scorefont.draw(200, int(self._m_Notedata[keyidx][idx]), str(idx),(255,255,255))
+                        #self._m_scorefont.draw(200, int(self._m_Notedata[keyidx][idx]), str(idx),(255,255,255))
                         if keyidx % 2 == 0:
                             self._m_note1_image.draw(283 + 69 * keyidx, int(self._m_Notedata[keyidx][idx]))
                         elif keyidx % 2 == 1:

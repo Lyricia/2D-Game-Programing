@@ -9,6 +9,7 @@ class player:
         self.name = name
         self.fever = 0
         self.score = 0
+        self.avgacc = 0
         self.rank = 0
         pass
 
@@ -25,3 +26,7 @@ class player:
             f.close()
         else:
             print('Cannot find savefile\n')
+
+    def setStat(self, _score, _avgacc):
+        self.avgacc = _avgacc
+        self.score = _score

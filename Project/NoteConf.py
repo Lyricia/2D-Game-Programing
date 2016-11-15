@@ -13,8 +13,7 @@ class Note:
     _m_ElapsedVal = 0
     _m_CurrentNoteIdx = 0
     _m_calljudgeSpriteTimer = None
-    _m_score = 0
-    _m_combo = 0
+
 
     notechk = 0
 
@@ -29,7 +28,14 @@ class Note:
 
         self._NotePosition()
         self._m_ElapsedVal = 0
+
         self._m_accuracy = 0
+        self._m_score = 0
+        self._m_combo = 0
+        self._m_deathcount = 0
+        self._m_averageaccuracy = 0.0
+        self._m_notecount = 0
+
         self._m_CurrentNoteIdx = 0
         self._m_calljudgeSpriteTimer = SpriteConf.Sprite()
 
@@ -65,6 +71,8 @@ class Note:
                     self._m_Notelist[keyidx][tmp] -= 1 * self._m_speed
                 if 120 < self._m_Notelist[keyidx][tmp] < 140:
                     self._m_Notelist[keyidx][tmp] = 0
+                    self._m_deathcount += 1
+                    self._m_notecount += 1
                     self._m_combo = 0
 
     def NoteTimer(self, currenttime, prevtime):
@@ -78,13 +86,19 @@ class Note:
         if self._m_posacctime > 1 / (float(self._m_SongBPM) * 2):         #Timer Move note 1 pixel per 1/BPM sec
             self.UpdateNote()
             self._m_posacctime -= 1 / (float(self._m_SongBPM)*2)
-            self._m_posacctime -= 1 / (float(self._m_SongBPM) * 2)
 
     def notejudgechk(self,keynum):
         for idx in range(len(self._m_Notelist[0])):
             if 150 - 20 < self._m_Notelist[keynum][idx] < 150 + 20:
+                self._m_notecount += 1
                 self._m_accuracy = int(100 - abs(150 - self._m_Notelist[keynum][idx]) * 4)
                 self._m_score += self._m_accuracy * 10
+
+                self._m_averageaccuracy += self._m_accuracy
+
+                if self._m_deathcount > 0:
+                    self._m_deathcount -= 1
+
                 self._m_Notelist[keynum][idx] = 0
                 self._m_combo +=1
                 return True
