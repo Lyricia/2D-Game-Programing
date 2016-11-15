@@ -11,6 +11,7 @@ class PlayScene:
     _m_effectsprite_image = None
     _m_keysprite_image = None
     _m_scorefont = None
+    _m_isPause = False
 
 
     def __init__(self, pt_Framework, Musictitle):     # load music data
@@ -84,6 +85,9 @@ class PlayScene:
         elif self._m_keys[SDL_SCANCODE_5] and self._m_Musicdata._m_CurrentNote._m_speed != 5:
             self._m_Musicdata._m_CurrentNote._m_speed = 5
             self._m_Musicdata._m_CurrentNote._NotePosition()
+
+        if self._m_keys[SDL_SCANCODE_P]:
+            self._m_isPause = True
 
         if self._m_keys[SDL_SCANCODE_M]:
             self._m_Musicdata.MusicStop()
