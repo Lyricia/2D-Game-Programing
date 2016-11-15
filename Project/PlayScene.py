@@ -112,7 +112,7 @@ class PlayScene:
             self._m_keysprite_image = load_image('Resources\\Image\\KeySprite.png')
             self._m_keysprite_image.opacify(0.1)
         if not self._m_scorefont:
-            self._m_scorefont = load_font('Resources\\Fonts\\Score.ttf',15)
+            self._m_scorefont = load_font('Resources\\Fonts\\Score.ttf',20)
 
 
     def sceneupdate(self):  # update play scene -> time update
@@ -136,6 +136,7 @@ class PlayScene:
         self._m_gear_image.draw(400, 380)
         self._m_scorefont.draw(30, 100, str(self._m_Musicdata._m_CurrentNote._m_score), (255, 255, 255))
         self._m_scorefont.draw(30, 150, str(self._m_Musicdata._m_CurrentNote._m_accuracy) + '%', (255, 255, 255))
+        self._m_scorefont.draw(30, 200, str(self._m_Musicdata._m_CurrentNote._m_combo), (255, 255, 255))
 
         draw_rectangle(200,0,450,142)
 
