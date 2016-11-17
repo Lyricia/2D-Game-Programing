@@ -42,8 +42,6 @@ class MenuScene:
             self.call_fw.switchscene(self.call_fw._m_CurrentScene)
 
     def sceneupdate(self ):  # update play scene -> time update
-
-        #print('menu update func')
         self.handle_event()
         pass
 

@@ -13,7 +13,6 @@ class PlayScene:
     _m_healthbar = None
     _m_scorefont = None
 
-
     def __init__(self, pt_Framework, Musictitle):     # load music data
         self._m_Musicdata = MusicConf.Music(Musictitle)
         self._m_Notedata = self._m_Musicdata._m_CurrentNote._m_Notelist
@@ -69,7 +68,6 @@ class PlayScene:
         if not self._m_keys[SDL_SCANCODE_I] :
             self._m_keysprite[3].framelock = False
 
-
         if self._m_keys[SDL_SCANCODE_1] and self._m_Musicdata._m_CurrentNote._m_speed != 1:
             self._m_Musicdata._m_CurrentNote._m_speed = 1
             self._m_Musicdata._m_CurrentNote._NotePosition()
@@ -90,7 +88,6 @@ class PlayScene:
             if self.call_fw._m_isPaused is False:
                 self.call_fw._m_isPaused = True
                 self._m_Musicdata.MusicPause()
-
             elif self.call_fw._m_isPaused is True:
                 self.call_fw._m_isPaused  = False
                 self._m_Musicdata.MusicResume()
@@ -122,11 +119,8 @@ class PlayScene:
         if not self._m_scorefont:
             self._m_scorefont = load_font('Resources\\Fonts\\Score.ttf',20)
 
-
     def sceneupdate(self):  # update play scene -> time update
-
         self.handle_event()
-
         if self._m_Musicdata is not None:
             for keyidx in range(self._m_Musicdata._m_CurrentNote._m_keynum):
                 if self._m_keysprite[keyidx].framelock and self._m_keysprite[keyidx].SpriteFrame is 5:
@@ -162,9 +156,9 @@ class PlayScene:
         self._m_healthbar.draw(536, 210 -(10*self._m_Musicdata._m_CurrentNote._m_deathcount),
                                10, 235 -(23*self._m_Musicdata._m_CurrentNote._m_deathcount))
 
-        self._m_scorefont.draw(30, 100, str(self._m_Musicdata._m_CurrentNote._m_score), (255, 255, 255))
-        self._m_scorefont.draw(30, 150, str(self._m_Musicdata._m_CurrentNote._m_accuracy) + '%', (255, 255, 255))
-        self._m_scorefont.draw(30, 200, str(self._m_Musicdata._m_CurrentNote._m_combo), (255, 255, 255))
+        self._m_scorefont.draw(20, 100, str('Score : %d' %self._m_Musicdata._m_CurrentNote._m_score), (255, 255, 255))
+        self._m_scorefont.draw(20, 150, str('Accuracy : %d' %self._m_Musicdata._m_CurrentNote._m_accuracy)+'%', (255, 255, 255))
+        self._m_scorefont.draw(20, 200, str('Combo : %d' %self._m_Musicdata._m_CurrentNote._m_combo), (255, 255, 255))
 
         for keyidx in range(4):
             if self._m_keysprite[keyidx].bSprite:

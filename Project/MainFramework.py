@@ -9,7 +9,6 @@ import PlayerConf
 class Framework:
 
     _m_State = False
-
     #Frame
     _m_FPS_MAX = 1/60
 
@@ -17,8 +16,6 @@ class Framework:
     _m_PrevTime = 0.0
     _m_AccTime = 0.0           #Accumulated time -> playing time
 
-    #music
-    _m_Music = None
     _m_runMusic = False
     _m_CurrentScene = None
 
@@ -82,7 +79,7 @@ class Framework:
             self._m_AccTime += self._m_CurrentTime - self._m_PrevTime
 
             if self._m_NoteData is not None:
-                if self._m_isPaused is False:
+                if not self._m_isPaused:
                     self._m_NoteData.NoteTimer(self._m_CurrentTime, self._m_PrevTime)
 
             for idx in range(0,4):
@@ -94,15 +91,11 @@ class Framework:
                         self._m_EffectSpriteTimer[idx].SpriteTimer(self._m_CurrentTime, self._m_PrevTime)
 
             self._m_PrevTime = self._m_CurrentTime
-
-
             if self._m_AccTime > self._m_FPS_MAX:       # draw when time over fps
                 self._update()
                 self._draw()
                 self._m_AccTime -= self._m_FPS_MAX
-
         self._exit()
-
 
     def _exit(self):
         self._m_State=False
