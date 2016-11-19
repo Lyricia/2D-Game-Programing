@@ -19,6 +19,7 @@ class ResultScene:
 
         self._m_Score = self.call_fw._m_player.score
         self._m_averageaccuracy = round(self.call_fw._m_player.avgacc, 2)
+        self._m_MaxCombo = self.call_fw._m_player.combo
         pass
 
     def handle_event(self):
@@ -38,10 +39,14 @@ class ResultScene:
 
         self._m_resultfont.draw(150,650,str("Result"))
         self._m_stringfont.draw(150, 450, str("Score :"))
-        self._m_stringfont.draw(100, 350, str("Avg. Accuracy :"))
-
         self._m_numberfont.draw(450, 450, str(self._m_Score))
-        self._m_numberfont.draw(450, 350, str(self._m_averageaccuracy)+'%')
+
+        self._m_stringfont.draw(100, 350, str("Maximum Combo :"))
+        self._m_numberfont.draw(450, 350, str(self._m_MaxCombo))
+
+        self._m_stringfont.draw(100, 250, str("Avg. Accuracy :"))
+        self._m_numberfont.draw(450, 250, str(self._m_averageaccuracy)+'%')
+
 
         self._m_stringfont.draw(175, 100, str("Press Enter to back to menu"))
 

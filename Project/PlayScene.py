@@ -129,7 +129,8 @@ class PlayScene:
             if self._m_Musicdata._m_CurrentNote._m_deathcount > 10:
                 self.call_fw._m_player.setStat(self._m_Musicdata._m_CurrentNote._m_score,
                                                (self._m_Musicdata._m_CurrentNote._m_averageaccuracy /
-                                                self._m_Musicdata._m_CurrentNote._m_notecount))
+                                                self._m_Musicdata._m_CurrentNote._m_notecount),
+                                               self._m_Musicdata._m_CurrentNote._m_MaxCombo)
                 self._m_Musicdata.MusicStop()
                 self._m_Musicdata = None
                 self.call_fw._m_runMusic = False
@@ -140,7 +141,8 @@ class PlayScene:
             if self._m_Musicdata.MusicFinished():
                 self.call_fw._m_player.setStat(self._m_Musicdata._m_CurrentNote._m_score,
                                                (self._m_Musicdata._m_CurrentNote._m_averageaccuracy /
-                                                self._m_Musicdata._m_CurrentNote._m_notecount))
+                                                self._m_Musicdata._m_CurrentNote._m_notecount),
+                                               self._m_Musicdata._m_CurrentNote._m_MaxCombo)
                 self._m_Musicdata.MusicStop()
                 self._m_Musicdata = None
                 self.call_fw._m_runMusic = False
@@ -159,6 +161,7 @@ class PlayScene:
         self._m_scorefont.draw(20, 100, str('Score : %d' %self._m_Musicdata._m_CurrentNote._m_score), (255, 255, 255))
         self._m_scorefont.draw(20, 150, str('Accuracy : %d' %self._m_Musicdata._m_CurrentNote._m_accuracy)+'%', (255, 255, 255))
         self._m_scorefont.draw(20, 200, str('Combo : %d' %self._m_Musicdata._m_CurrentNote._m_combo), (255, 255, 255))
+        self._m_scorefont.draw(20, 250, str('MaxCombo : %d' % self._m_Musicdata._m_CurrentNote._m_MaxCombo), (255, 255, 255))
 
         for keyidx in range(4):
             if self._m_keysprite[keyidx].bSprite:

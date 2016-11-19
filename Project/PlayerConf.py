@@ -7,7 +7,7 @@ class player:
     def __init__(self,name='Player01'):
         self.keynum = 4
         self.name = name
-        self.fever = 0
+        self.combo = 0
         self.score = 0
         self.avgacc = 0
         self.rank = 0
@@ -27,6 +27,7 @@ class player:
         else:
             print('Cannot find savefile\n')
 
-    def setStat(self, _score, _avgacc):
+    def setStat(self, _score, _avgacc, _combo):
         self.avgacc = _avgacc
         self.score = _score
+        self.combo = _combo

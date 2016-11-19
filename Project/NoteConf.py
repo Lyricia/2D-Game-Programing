@@ -32,6 +32,7 @@ class Note:
         self._m_accuracy = 0
         self._m_score = 0
         self._m_combo = 0
+        self._m_MaxCombo =0
         self._m_deathcount = 0
         self._m_averageaccuracy = 0.0
         self._m_notecount = 0
@@ -73,6 +74,7 @@ class Note:
                     self._m_Notelist[keyidx][tmp] = 0
                     self._m_deathcount += 1
                     self._m_notecount += 1
+                    self.MaxComboSort()
                     self._m_combo = 0
 
     def NoteTimer(self, currenttime, prevtime):
@@ -101,7 +103,16 @@ class Note:
 
                 self._m_Notelist[keynum][idx] = 0
                 self._m_combo +=1
+                self.MaxComboSort()
                 return True
+
+    def MaxComboSort(self):
+        if (self._m_MaxCombo == 0):
+            self._m_MaxCombo = self._m_combo
+        else:
+            if self._m_combo > self._m_MaxCombo:
+                self._m_MaxCombo = self._m_combo
+        pass
 
     def __del__(self):
         del self._m_Notelist
