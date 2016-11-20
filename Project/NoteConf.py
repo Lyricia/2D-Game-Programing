@@ -91,7 +91,7 @@ class Note:
 
     def notejudgechk(self,keynum):
         for idx in range(len(self._m_Notelist[0])):
-            if 150 - 20 < self._m_Notelist[keynum][idx] < 150 + 20:
+            if 140 - 25 < self._m_Notelist[keynum][idx] < 140 + 25:
                 self._m_notecount += 1
                 self._m_accuracy = int(100 - abs(150 - self._m_Notelist[keynum][idx]) * 4)
                 self._m_score += self._m_accuracy * 10
