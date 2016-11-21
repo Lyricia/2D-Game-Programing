@@ -12,6 +12,7 @@ class PlayScene:
     _m_keysprite_image = None
     _m_healthbar = None
     _m_scorefont = None
+    _m_judgefont = None
 
     def __init__(self, pt_Framework, Musictitle):     # load music data
         self._m_Musicdata = MusicConf.Music(Musictitle)
@@ -118,6 +119,8 @@ class PlayScene:
             self._m_keysprite_image.opacify(0.1)
         if not self._m_scorefont:
             self._m_scorefont = load_font('Resources\\Fonts\\Score.ttf',20)
+        if not self._m_judgefont:
+            self._m_judgefont = load_font('Resources\\Fonts\\Judgefont.ttf', 50)
 
     def sceneupdate(self):  # update play scene -> time update
         self.handle_event()
@@ -163,6 +166,9 @@ class PlayScene:
         self._m_scorefont.draw(20, 200, str('Combo : %d' %self._m_Musicdata._m_CurrentNote._m_combo), (255, 255, 255))
         self._m_scorefont.draw(20, 250, str('MaxCombo : %d' % self._m_Musicdata._m_CurrentNote._m_MaxCombo), (255, 255, 255))
 
+        if(self._m_Musicdata._m_CurrentNote._m_accuracy > 60):
+            self._m_judgefont.draw(300, 200, str('KOOL'), (255, 255, 255))
+
         for keyidx in range(4):
             if self._m_keysprite[keyidx].bSprite:
                 for frameidx in range(self._m_keysprite[keyidx].SpriteFrame):
@@ -183,6 +189,8 @@ class PlayScene:
                 for frameidx in range(self._m_effectsprite[keyidx].SpriteFrame):
                     self._m_effectsprite_image.clip_draw(self._m_effectsprite[keyidx].SpriteFrame * 192, 0, 192, 192,
                                                          283 + (69 * keyidx), 155, 120, 120)
+
+
 
     def spritereturn(self):
         return self._m_keysprite
