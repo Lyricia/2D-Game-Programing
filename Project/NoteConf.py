@@ -76,6 +76,7 @@ class Note:
                     self._m_notecount += 1
                     self.MaxComboSort()
                     self._m_combo = 0
+                    self._m_accuracy = 0
 
     def NoteTimer(self, currenttime, prevtime):
         self._m_idxacctime += currenttime - prevtime
