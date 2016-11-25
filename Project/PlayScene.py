@@ -167,12 +167,14 @@ class PlayScene:
         self._m_scorefont.draw(20, 250, str('MaxCombo : %d' % self._m_Musicdata._m_CurrentNote._m_MaxCombo), (255, 255, 255))
 
         if self._m_Musicdata._m_CurrentNote._m_score is not 0:
-            if (self._m_Musicdata._m_CurrentNote._m_accuracy > 60):
-                self._m_judgefont.draw(300, 200, str('KOOL'), (255, 255, 255))
-            if (60 > self._m_Musicdata._m_CurrentNote._m_accuracy > 30):
-                self._m_judgefont.draw(300, 200, str('GOOD'), (255, 255, 255))
+            if (60 < self._m_Musicdata._m_CurrentNote._m_accuracy):
+                self._m_judgefont.draw(310, 250, str('KOOL'), (255, 255, 255))
+            if (30 < self._m_Musicdata._m_CurrentNote._m_accuracy <= 60):
+                self._m_judgefont.draw(310, 250, str('GOOD'), (255, 255, 255))
+            if (0 < self._m_Musicdata._m_CurrentNote._m_accuracy <= 30):
+                self._m_judgefont.draw(310, 250, str('nice'), (255, 255, 255))
             if (self._m_Musicdata._m_CurrentNote._m_accuracy == 0):
-                self._m_judgefont.draw(300, 200, str('MISS'), (255, 255, 255))
+                self._m_judgefont.draw(310, 250, str('MISS'), (255, 255, 255))
 
         for keyidx in range(4):
             if self._m_keysprite[keyidx].bSprite:

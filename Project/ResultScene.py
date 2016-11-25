@@ -47,6 +47,5 @@ class ResultScene:
         self._m_stringfont.draw(100, 250, str("Avg. Accuracy :"))
         self._m_numberfont.draw(450, 250, str(self._m_averageaccuracy)+'%')
 
-
         self._m_stringfont.draw(175, 100, str("Press Enter to back to menu"))
 
