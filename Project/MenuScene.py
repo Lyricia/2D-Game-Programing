@@ -52,6 +52,6 @@ class MenuScene:
 
     def scenedraw(self):
         self._m_background.draw(400, 380)
-        self._m_menu.draw(400, 380,1000, 750)
+        self._m_menu.draw(400, 380, 1000, 750)
         self._m_titlefont.draw(85, 500, str("Drop Da BEAT"), (255,150,0))
         self._m_stringfont.draw(175,100, str("Press Enter to Start"), (255,255,255))

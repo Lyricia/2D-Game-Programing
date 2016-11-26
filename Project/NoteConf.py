@@ -14,9 +14,6 @@ class Note:
     _m_CurrentNoteIdx = 0
     _m_calljudgeSpriteTimer = None
 
-
-    notechk = 0
-
     def __init__(self, Songname, SongBPM):
         self._m_Notelist = list()
         self._notesync(Songname)

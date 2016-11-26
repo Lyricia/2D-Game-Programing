@@ -197,11 +197,6 @@ class PlayScene:
                     self._m_effectsprite_image.clip_draw(self._m_effectsprite[keyidx].SpriteFrame * 192, 0, 192, 192,
                                                          283 + (69 * keyidx), 155, 120, 120)
 
-
-
-    def spritereturn(self):
-        return self._m_keysprite
-
     def __del__(self):
         del (self._m_background_image)
         del (self._m_gear_image)
