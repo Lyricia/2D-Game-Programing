@@ -28,10 +28,6 @@ class MenuScene:
             self.call_fw._m_musicname = 'Evans'
             self.call_fw._m_CurrentScene = 'PlayScene'
             self.call_fw.switchscene(self.call_fw._m_CurrentScene)
-        if self._m_keys[SDL_SCANCODE_A]:
-            self.call_fw._m_musicname = '180BPM'
-            self.call_fw._m_CurrentScene = 'PlayScene'
-            self.call_fw.switchscene(self.call_fw._m_CurrentScene)
 
         if self._m_keys[SDL_SCANCODE_RETURN]:
             self.call_fw._m_musicname = 'Evans'

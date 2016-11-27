@@ -9,7 +9,6 @@ class Note:
 
     _m_speed = 1
     _m_keynum = 4
-    _m_judgeidx = 0
     _m_ElapsedVal = 0
     _m_CurrentNoteIdx = 0
     _m_calljudgeSpriteTimer = None
