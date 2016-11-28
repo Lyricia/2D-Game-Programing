@@ -1,5 +1,5 @@
 Evans Evans.mp3 Evans.txt 185 110 *
 120BPM 120BPM.mp3 120BPM.txt 60 60 *
 180BPM 180BPM.mp3 180BPM.txt 180 60 *
-Evans3 Evans3.mp3 Evans3.txt 180 110 *
+Lucid Lucid.mp3 Lucid.txt 175 110 *
 Evans4 Evans4.mp3 Evans4.txt 180 110 *

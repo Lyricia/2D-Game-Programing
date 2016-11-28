@@ -34,6 +34,11 @@ class MenuScene:
             self.call_fw._m_CurrentScene = 'PlayScene'
             self.call_fw.switchscene(self.call_fw._m_CurrentScene)
 
+        if self._m_keys[SDL_SCANCODE_F]:
+            self.call_fw._m_musicname = 'LUCID'
+            self.call_fw._m_CurrentScene = 'PlayScene'
+            self.call_fw.switchscene(self.call_fw._m_CurrentScene)
+
         if self._m_keys[SDL_SCANCODE_G]:
             self.call_fw._m_CurrentScene = 'GameOverScene'
             self.call_fw.switchscene(self.call_fw._m_CurrentScene)
