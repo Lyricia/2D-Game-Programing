@@ -78,17 +78,7 @@ class Framework:
             self._m_CurrentTime = time.time()
             self._m_AccTime += self._m_CurrentTime - self._m_PrevTime
 
-            if self._m_NoteData is not None:
-                if not self._m_isPaused:
-                    self._m_NoteData.NoteTimer(self._m_CurrentTime, self._m_PrevTime)
-
-            for idx in range(0,4):
-                if self._m_KeySpriteTimer is not None:
-                    if self._m_KeySpriteTimer[idx].bSprite:
-                        self._m_KeySpriteTimer[idx].SpriteTimer(self._m_CurrentTime, self._m_PrevTime)
-                if self._m_EffectSpriteTimer is not None:
-                    if self._m_EffectSpriteTimer[idx].bSprite:
-                        self._m_EffectSpriteTimer[idx].SpriteTimer(self._m_CurrentTime, self._m_PrevTime)
+            self.liveupdate()
 
             self._m_PrevTime = self._m_CurrentTime
             if self._m_AccTime > self._m_FPS_MAX:       # draw when time over fps
@@ -96,6 +86,20 @@ class Framework:
                 self._draw()
                 self._m_AccTime -= self._m_FPS_MAX
         self._exit()
+
+    def liveupdate(self):
+        if self._m_NoteData is not None:
+            if not self._m_isPaused:
+                self._m_NoteData.NoteTimer(self._m_CurrentTime, self._m_PrevTime)
+
+        for idx in range(0, 4):
+            if self._m_KeySpriteTimer is not None:
+                if self._m_KeySpriteTimer[idx].bSprite:
+                    self._m_KeySpriteTimer[idx].SpriteTimer(self._m_CurrentTime, self._m_PrevTime)
+            if self._m_EffectSpriteTimer is not None:
+                if self._m_EffectSpriteTimer[idx].bSprite:
+                    self._m_EffectSpriteTimer[idx].SpriteTimer(self._m_CurrentTime, self._m_PrevTime)
+
 
     def _exit(self):
         self._m_State=False

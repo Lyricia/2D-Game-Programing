@@ -86,7 +86,7 @@ class Note:
             self.UpdateNote()
             self._m_posacctime -= 1 / (float(self._m_SongBPM)*2)
 
-    def notejudgechk(self,keynum):
+    def notejudgechk(self, keynum):
         for idx in range(len(self._m_Notelist[0])):
             if 140 - 25 < self._m_Notelist[keynum][idx] < 140 + 25:
                 self._m_notecount += 1
