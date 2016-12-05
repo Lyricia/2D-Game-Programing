@@ -17,7 +17,7 @@ class Note:
         self._m_Notelist = list()
         self._notesync(Songname)
 
-        self._m_speed = 1
+        self._m_speed = 2
         self._m_SongBPM = int(SongBPM)
         self._m_posacctime = 0
         self._m_idxacctime = 0
@@ -32,6 +32,9 @@ class Note:
         self._m_deathcount = 0
         self._m_averageaccuracy = 0.0
         self._m_notecount = 0
+        self._m_beatslicetime = 2
+
+        self._m_BeatTime = float(self._m_SongBPM) * self._m_beatslicetime
 
         self._m_CurrentNoteIdx = 0
         self._m_calljudgeSpriteTimer = SpriteConf.Sprite()
@@ -78,19 +81,19 @@ class Note:
         self._m_idxacctime += currenttime - prevtime
         self._m_posacctime += currenttime - prevtime
 
-        if self._m_idxacctime > 60.0 / (float(self._m_SongBPM) * 2):      #timer to count Current Beat Note Index
+        if self._m_idxacctime > 60.0 / self._m_BeatTime:      #timer to count Current Beat Note Index
             self._m_CurrentNoteIdx += 1
-            self._m_idxacctime -= 60.0 / (float(self._m_SongBPM) * 2)
+            self._m_idxacctime -= 60.0 / self._m_BeatTime
 
-        if self._m_posacctime > 1 / (float(self._m_SongBPM) * 2):         #Timer Move note 1 pixel per 1/BPM sec
+        if self._m_posacctime > 1 / self._m_BeatTime:         #Timer Move note 1 pixel per 1/BPM sec
             self.UpdateNote()
-            self._m_posacctime -= 1 / (float(self._m_SongBPM)*2)
+            self._m_posacctime -= 1 / self._m_BeatTime
 
     def notejudgechk(self, keynum):
         for idx in range(len(self._m_Notelist[0])):
             if 140 - 25 < self._m_Notelist[keynum][idx] < 140 + 25:
                 self._m_notecount += 1
-                self._m_accuracy = int(100 - abs(150 - self._m_Notelist[keynum][idx]) * 4)
+                self._m_accuracy = int(100 - abs(155 - self._m_Notelist[keynum][idx]) * 4)
                 self._m_score += self._m_accuracy * 10
 
                 self._m_averageaccuracy += self._m_accuracy
