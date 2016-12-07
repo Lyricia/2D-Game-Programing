@@ -158,7 +158,7 @@ class PlayScene:
     def scenedraw(self):
         self._m_background_image.draw(400, 380)
         self._m_gear_image.draw(400, 380)
-        self._m_healthbar.draw(536, 210 -(10*self._m_Musicdata._m_CurrentNote._m_deathcount),
+        self._m_healthbar.draw(536, 210 -(10*self._m_Musicdata._m_CurrentNote._m_de athcount),
                                10, 235 -(23*self._m_Musicdata._m_CurrentNote._m_deathcount))
 
         self._m_scorefont.draw(20, 100, str('Score : %d' %self._m_Musicdata._m_CurrentNote._m_score), (255, 255, 255))
