@@ -61,7 +61,7 @@ class Note:
             for idx in range(len(self._m_Notelist[0])):
                 if self._m_Notelist[keyidx][idx] != 0:
                     self._m_Notelist[keyidx][idx] = \
-                        (float)(120 + ((idx -self._m_CurrentNoteIdx) * 60 * self._m_speed) + self._m_ElapsedVal)
+                        (float)(120 + ((idx - self._m_CurrentNoteIdx) * 60 * self._m_speed) + self._m_ElapsedVal)
 
     def UpdateNote(self):
         self._m_ElapsedVal = ((self._m_ElapsedVal + 1) % 60) * self._m_speed

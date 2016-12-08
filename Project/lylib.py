@@ -42,8 +42,3 @@ def searchfile(target, isSavefile=False):
         else:
             Mbox("CANNOT FIND NOTEFILE", "CANNOT FIND NOTEFILE\n %s\nPlz Chk Note dir" % savefile, 0)
             return False
-
-
-
-
-
