@@ -17,7 +17,7 @@ class Note:
         self._m_Notelist = list()
         self._notesync(Songname)
 
-        self._m_speed = 2
+        self._m_speed = 1
         self._m_SongBPM = int(SongBPM)
         self._m_posacctime = 0
         self._m_idxacctime = 0
