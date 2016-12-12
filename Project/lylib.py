@@ -6,8 +6,6 @@ import os
 import datetime
 import time
 
-
-
 def Mbox(title, text, style):
     ctypes.windll.user32.MessageBoxW(0, text, title, style)
 
