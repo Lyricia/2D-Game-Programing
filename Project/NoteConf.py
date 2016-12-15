@@ -31,7 +31,7 @@ class Note:
         self._m_deathcount = 0
         self._m_averageaccuracy = 0.0
         self._m_notecount = 0
-        self._m_beatslicetime = 4
+        self._m_beatslicetime = 2
 
         self._m_BeatTime = float(self._m_SongBPM) * self._m_beatslicetime
 
